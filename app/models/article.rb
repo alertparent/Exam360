@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  attr_accessible :title, :body_part, :blog_category_id, :subcategory_id, :enable_comment, :user_id
+  # attr_accessible :title, :body_part, :blog_category_id, :subcategory_id, :enable_comment, :user_id
   belongs_to :user
   has_many :comments, :dependent => :destroy
   belongs_to :blog_category

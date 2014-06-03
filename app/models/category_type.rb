@@ -1,4 +1,5 @@
 class CategoryType < ActiveRecord::Base
+  # attr_accessible :title, :organization_id, :sort_order
   belongs_to :organization
   has_many :category_titles
   has_many :categories

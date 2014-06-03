@@ -2,7 +2,7 @@ class Asset < ActiveRecord::Base
   
  #------------- paperclip -------------------
 
-attr_accessible :user_id, :uploaded_file  
+# attr_accessible :user_id, :uploaded_file  
 belongs_to :user  
   
 #set up "uploaded_file" field as attached_file (using Paperclip)  
@@ -17,7 +17,7 @@ validates_uniqueness_of :uploaded_file_file_name, :scope => [:folder_id], :messa
 validates_length_of :uploaded_file_file_name, :maximum => 45
 #-------------paperclip end ---------------- 
 
-attr_accessible :user_id, :uploaded_file, :folder_id  
+# attr_accessible :user_id, :uploaded_file, :folder_id  
 belongs_to :folder
 
 def file_name  

@@ -1,5 +1,5 @@
 class Subcategory < ActiveRecord::Base
-  attr_accessible :name, :blog_category_id
+  # attr_accessible :name, :blog_category_id
   belongs_to :blog_category
   has_many :articles, :dependent=>:destroy
 

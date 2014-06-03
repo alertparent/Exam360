@@ -41,7 +41,7 @@ gem "truncate_html"
 # gem 'ruby-debug19'
 
 
-gem 'protected_attributes'
+# gem 'protected_attributes'
 gem 'rails-observers'
 gem 'actionpack-page_caching'
 gem 'actionpack-action_caching'
