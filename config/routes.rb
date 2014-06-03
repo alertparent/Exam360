@@ -6,7 +6,7 @@ Exam360::Application.routes.draw do
     # get "sign_in", to: "devise/sessions#new"
     match 'login' => "user_sessions#new",      :as => :login,:via=> :all
     match 'logout' => "user_sessions#destroy", :as => :logout,:via=> :all
-    # resources :users
+    resources :users
     get "users/show"
 
     get "users/edit"

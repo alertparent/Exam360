@@ -1,11 +1,3 @@
-=begin 
-  users_controller.rb
-  Description: Controller file for managing the users of the application
-  Created on: March 05, 2011
-  Last modified on: March 18, 2013
-  Copyright 2013 PIT Solutions Pvt. Ltd. All Rights Reserved.
-=end
-
 class UsersController < ApplicationController
   before_filter :get_indexdata , :only=>:index
   before_filter :check_perm_level, :only=>[:index,:new]
@@ -17,7 +9,7 @@ class UsersController < ApplicationController
       if params[:search] != "" and params[:search] != nil and params[:search] != "Search User Id" and params[:search] != "Suche User Id" and params[:search] != "بحث معرف المستخدم"
           @users = User.search(params[:search],params[:create_id].to_i).order('created_at desc').paginate(:page => params[:page], :per_page => @pagelength)
       else
-          @users = User.get_users(@current_user.role_id, @create_id.to_i, params[:examinee_temp]).order('created_at desc').paginate(:page => params[:page], :per_page => @pagelength)
+          # @users = User.get_users(@current_user.role_id, @create_id.to_i, params[:examinee_temp]).order('created_at desc').paginate(:page => params[:page], :per_page => @pagelength)
       end       
   end  
 

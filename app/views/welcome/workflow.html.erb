@@ -8,10 +8,10 @@
                   <li>
 				  
 				  	<p class="tooltip" style="border:0; display:inline-block; margin:0 0 0 5px" >
-					<% if current_user.role_id == 1%>
+					<% if current_user.role.name == "admin"%>
 					<%=link_to t('general.settings'),{ :action=>"index", :controller=>"settings"}%>
 					<span class="custom info"><em></em><%=t('workflow.settings_desc')%></span>
-					<%elsif current_user.role_id == 2%>
+					<%elsif current_user.role.name == "examiner"%>
 					<%=link_to t('general.settings'),"#nogo"%>
 					<span class="custom info"><em></em><%=t('workflow.settings_desc_2')%></span>
 					<%end%>					  
@@ -200,10 +200,10 @@
                 <ul class="icons_list">
                   <li>
 				  	<p class="tooltip" style="border:0; display:inline-block; margin:0 0 0 5px" >
-					<% if current_user.role_id == 1%>
+					<% if current_user.role.name == "admin"%>
 					<%=link_to t('general.settings'),{ :action=>"index", :controller=>"settings"}%>
 					<span class="custom info"><em></em><%=t('workflow.settings_desc')%></span>
-					<%elsif current_user.role_id == 2%>
+					<%elsif current_user.role.name == "examiner"%>
 					<%=link_to t('general.settings'),"#nogo"%>
 					<span class="custom info"><em></em><%=t('workflow.settings_desc_2')%></span>
 					<%end%>					  
@@ -242,7 +242,7 @@
                 <ul class="icons_list group_two w377">
                   <li>
                   	<p class="tooltip" style="border:0; display:inline-block; margin:0 0 0 5px" >
-					<% if current_user.role_id == 1%>
+					<% if current_user.role.name == "admin"%>
 					<%=link_to t('general.client_image'),{ :action=>"clientImage", :controller=>"images"}%>
 					<span class="custom info"><em></em><%=t('workflow.CIU_desc')%></span>  
 					<%else%>
@@ -253,7 +253,7 @@
 				  </li>
                    <li>
                   	<p class="tooltip" style="border:0; display:inline-block; margin:0 0 0 5px" >
-					<% if current_user.role_id == 1%>
+					<% if current_user.role.name == "admin"%>
 					<%=link_to t('about.aboutus'),{ :action=>"index", :controller=>"aboutus"}%>
 					<span class="custom info"><em></em><%=t('workflow.about_us_desc')%></span>  
 					<%else%>
@@ -264,7 +264,7 @@
 				   </li>
                   <li class="nobrdr">
                   	<p class="tooltip" style="border:0; display:inline-block; margin:0 0 0 5px" >
-					<% if current_user.role_id == 1%>
+					<% if current_user.role.name == "admin"%>
 					<%=link_to t('client.client_info'),{ :action=>"index", :controller=>"clientinfo"}%>
 					<span class="custom info"><em></em><%=t('workflow.client_info_desc')%></span>  
 					<%else%>
@@ -329,7 +329,7 @@
                 <ul class="icons_list group_four">
                   <li>
                   	<p class="tooltip" style="border:0; display:inline-block; margin:0 0 0 5px" >
-                  	<% if current_user.role_id == 1%>
+                  	<% if current_user.role.name == "admin"%>
 					<%= link_to t('general.examiner'), :action=>'index', :controller=>'users', :create_id => 2%>
 					<span class="custom info"><em></em><%=t('workflow.examiner_desc')%></span>  
 					<%else%>
@@ -346,7 +346,7 @@
 				  </li>
                   <li>
                   	<p class="tooltip" style="border:0; display:inline-block; margin:0 0 0 5px" >
-                  	<% if current_user.role_id == 1%>
+                  	<% if current_user.role.name == "admin"%>
 					<%= link_to t('general.activate'), :action=>'activate_inactivate', :controller=>'users'%>
 					<span class="custom info"><em></em><%=t('workflow.act_inact_desc')%></span>  
 					<%else%>
@@ -357,7 +357,7 @@
 				  </li>
                   <li class="nobrdr">
                   	<p class="tooltip" style="border:0; display:inline-block; margin:0 0 0 5px" >
-					<% if current_user.role_id == 1%>
+					<% if current_user.role.name == "admin"%>
 					<%= link_to t('general.confirm_reject_user'), :action=>'admin_dashboard', :controller=>'welcome'%>
 					<span class="custom info"><em></em><%=t('workflow.CORE_desc')%></span>  
 					<%else%>
