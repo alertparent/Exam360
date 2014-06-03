@@ -5,9 +5,9 @@
 
 <div class="formContainer" style="position:relative;">
     
-	 <% if current_user.role_id == 1 or current_user.role_id == 2%>
+	 <% if current_user.role.name == "admin" or current_user.role.name == "examiner"%>
 	 
-	   <% form_tag evaluate_path,:method=>"get", :remote=>true,:id=>"class_form", :class=>"assign_examinee" do -%>
+	   <%= form_tag evaluate_path,:method=>"get", :remote=>true,:id=>"class_form", :class=>"assign_examinee" do -%>
             <%=hidden_field_tag "flag",'e'%>
 			<table class="formTable" style="border:0px;">
             <tr>
@@ -42,7 +42,7 @@
 	
 	<%elsif current_user.role_id == 3 %>
 	 
-	  <% form_tag evaluate_path,:method=>"get", :remote=>true,:id=>"class_form", :class=>"assign_examinee" do -%>
+	  <%= form_tag evaluate_path,:method=>"get", :remote=>true,:id=>"class_form", :class=>"assign_examinee" do -%>
             <%=hidden_field_tag "flag",'e'%>
 			<table class="formTable" style="border:0px;">
             <tr>

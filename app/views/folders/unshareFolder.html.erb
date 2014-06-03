@@ -7,9 +7,9 @@
 			<table>
 				<%@shared_to_users.each do |user|%>
 					<%user_role = User.where("id = ?", user.shared_user_id)%>
-					<%if user_role.first.role_id == 1%>
+					<%if user_role.first.role.name == "admin"%>
 						<%user_type = t('roles.admin')%>
-					<%elsif user_role.first.role_id == 2%>
+					<%elsif user_role.first.role.name == "examiner"%>
 						<%user_type = t('roles.examiner')%>
 					<%elsif user_role.first.role_id == 3%>
 						<%user_type = t('roles.qsetter')%>

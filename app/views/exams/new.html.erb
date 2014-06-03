@@ -1,6 +1,6 @@
 <h1><%=t('exam.create')%></h1>
 
-<% form_tag exams_path, :id => "class_form" do %>
+<%= form_tag exams_path, :id => "class_form" do %>
   <label><%=t('exam.name')%></label><br />
   <%= text_field_tag "exam", '',:class=>"validate[required] text-input" %> <br /> <br />
   

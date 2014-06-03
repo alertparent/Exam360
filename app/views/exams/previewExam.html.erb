@@ -70,7 +70,7 @@
 
           <div class="formBg h212 w241" style="overflow:auto; overflow-x:hidden; float:left">
             <table  cellspacing="0" cellpadding="0" border="0" align="left" style="width:220px!important;float:left">
-              <%unless @examinees.empty?%>
+              <%unless @examinees.blank?%>
 			  <td align="left" valign="top"  style="width:100%!important;">Temporary Examinee(s): ( <%=@exam.tempCount(@exam.id)%> ) </td>
 
 			  <%@examinees.each do|examinee|%>
@@ -94,7 +94,7 @@
 <legend><%=t('general.questions')%></legend>
 
 
-         <%unless @questions.empty?%> 
+         <%unless @questions.blank?%> 
          <%@questions.each do|question|%>
 		  <div class="formBg floatL">
 			<table  style="width:100%;">

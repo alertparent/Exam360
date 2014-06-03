@@ -1,7 +1,7 @@
 <fieldset class="formContainer">
 <legend><%=t('password_reset.change_password')%></legend>
 
-<% form_for @user, :url => password_reset_path, :method => :put, :html => { :id => "class_form"} do |f| %>
+<%= form_for @user, :url => password_reset_path, :method => :put, :html => { :id => "class_form"} do |f| %>
 
   <table  style="width:100%;">
   <tr>

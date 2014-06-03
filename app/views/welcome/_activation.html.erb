@@ -1,5 +1,5 @@
-<%unless @registered_examinees.empty?%>
-	<% form_tag '#', :method => :post, :class => 'confirm_reject',:id => "class_form" do %>
+<%unless @registered_examinees.blank?%>
+	<%= form_tag '#', :method => :post, :class => 'confirm_reject',:id => "class_form" do %>
 		<div class="questionTabele">
 			<table border="0" cellspacing="0">
 				<tr class="updateHeader">

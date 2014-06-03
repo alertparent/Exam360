@@ -1,7 +1,7 @@
 <div style="float:left; width:98%; position:relative;padding:5px 5px; border:1px solid #ccc">
   	<%unless @descriptive == nil%>
 		<%@descriptive.each do|question|%>
-			<% form_tag evaluate_path,:method=>"get", :remote=>true,:id=>"question_filter", :class=>"assign_examinee" do -%>
+			<%= form_tag evaluate_path,:method=>"get", :remote=>true,:id=>"question_filter", :class=>"assign_examinee" do -%>
 				<%@eval = Evaluation.find_by_categoryuser_id_and_categoryexam_id_and_question_id_and_attempt(@categoryuser.id,@categoryexam.id,question.id,@attempt)%>
 			    <%=hidden_field_tag "flag",'eval'%>
 				<%=hidden_field_tag "categoryexam", @eval.categoryexam_id%>

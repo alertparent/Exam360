@@ -31,7 +31,7 @@
 						<%@checkAttended.each do|attended|%> 
 						<%= hidden_field_tag "current_answer_id[]", attended.id%>
 						<%end%>
-					<%if @checkAttended.empty?%>
+					<%if @checkAttended.blank?%>
 					
 					<td>
 		  				<div class="tblCols rowValue" style="width: 256px; margin: 0pt 0pt 0pt 60px;">	

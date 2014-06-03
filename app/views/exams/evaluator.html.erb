@@ -1,7 +1,7 @@
 <h2><%=t('evaluator.filter_evaluator')%>:</h2>
 
 <div class="formContainer" style="position:relative;">
-     <% form_tag evaluator_path,:method=>"get", :remote=>true,:id=>"class_form", :class=>"assign_examinee" do -%>
+     <%= form_tag evaluator_path,:method=>"get", :remote=>true,:id=>"class_form", :class=>"assign_examinee" do -%>
             <%=hidden_field_tag "flag",'e'%>
 			<table class="formTable" style="border:0px;">
             <tr>

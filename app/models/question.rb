@@ -53,7 +53,7 @@ class Question < ActiveRecord::Base
   
    def checkMark(q_id)
     findQuestion = Examquestion.where(["question_id = ?",q_id])
-    if findQuestion.empty?
+    if findQuestion.blank?
       return 1
     else
       return 0
@@ -77,7 +77,7 @@ class Question < ActiveRecord::Base
     
     def shared_by_others(question_id, user_id)
       list_of_recepients = SharedQuestion.where("question_id = ? AND user_id = ?",question_id, user_id)
-      if list_of_recepients.empty?
+      if list_of_recepients.blank?
         return 1
       else
         return 0

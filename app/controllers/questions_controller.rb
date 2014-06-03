@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
       @pagelength = params[:pageLength].to_i
     end
     @qId = params[:question_type]
-    @question_types = QuestionType.find(:all)
+    @question_types = QuestionType.all
     if current_user.role_id == Admin or current_user.role_id == Examiner
       if params[:question_type].to_i >= 1
       @question_type_id = params[:question_type]
@@ -64,7 +64,7 @@ class QuestionsController < ApplicationController
     mark = params[:mark].to_i
     question_id = params[:q_id].to_i
     findQuestion = Examquestion.where(["question_id = ?",question_id])
-    if findQuestion.empty?
+    if findQuestion.blank?
       render :text => true
     else
       render :text => false
@@ -73,9 +73,9 @@ class QuestionsController < ApplicationController
   
   def question_type_listing
     @qId = params[:q_id].to_i
-    @question_types = QuestionType.find(:all)
+    @question_types = QuestionType.all
     unless current_user.role_id == Qsetter
-    @category_subject = Categorysubject.find(:all)
+    @category_subject = Categorysubject.all
     else
     @category_subject = current_user.categorysubjects
     end
@@ -127,7 +127,7 @@ class QuestionsController < ApplicationController
     @question_type = QuestionType.find(params[:question_type].to_i)
     @question_type_name = @question_type.name
     @h_order = [1,2]
-    @images = Image.find(:all)
+    @images = Image.all
     @image = Image.new
     end
   end
@@ -661,7 +661,7 @@ class QuestionsController < ApplicationController
         evaluations = Evaluation.where(["question_id = ?", @question.id])
         examquestions = Examquestion.where(["question_id = ?", @question.id])
         
-        if evaluations.empty? and examquestions.empty?
+        if evaluations.blank? and examquestions.blank?
           if @sub_questions
              @sub_questions.each do|sq|
                sq.destroy

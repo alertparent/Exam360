@@ -34,7 +34,7 @@ class SubjectsController < ApplicationController
 
   def add_subject_category    
     @category_types = CategoryType.where(["organization_id=?", @organization_id.to_i]).sort { |x,y| x.sort_order <=> y.sort_order }
-     unless @category_types.empty?
+     unless @category_types.blank?
        @last_id = @category_types.last.id
         @first_id = @category_types.first.id
      end
@@ -77,7 +77,7 @@ class SubjectsController < ApplicationController
     questions = Question.find(:all, :joins => :categorysubject,
     :conditions => { :categorysubjects => { :subject_id => @subject.id } })
     
-    if questions.empty?
+    if questions.blank?
      if @category
         @subject.categories.delete(@category)
      end

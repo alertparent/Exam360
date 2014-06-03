@@ -26,7 +26,7 @@ class FeedbackController < ApplicationController
   
   def assign
    feedbackQuestion = Question.where(["feedback = ?",1])
-   if feedbackQuestion.empty?
+   if feedbackQuestion.blank?
      @all_published_questions = params[:question]
   
      @all_published_questions.each do|publish|

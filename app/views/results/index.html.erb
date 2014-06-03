@@ -2,7 +2,7 @@
 
 <%if current_user.role_id == Examinee%>
 
-<% form_tag resultIndex_path, :method=>"get", :id=>"class_form", :class=>"assign_question floatL w100pc mb15" do -%>
+<%= form_tag resultIndex_path, :method=>"get", :id=>"class_form", :class=>"assign_question floatL w100pc mb15" do -%>
 
 <div class="formContainer">
 	<table class="formTable" style="border:0px;">
@@ -35,7 +35,7 @@
 
 <div class="updateStatus">
 <h3><%=t('result.res')%></h3>
-<%unless @results.empty?%>
+<%unless @results.blank?%>
 <table border="0" cellspacing="0">
 <tr class="updateHeader">
 <th><%=t('exam.name')%></th>

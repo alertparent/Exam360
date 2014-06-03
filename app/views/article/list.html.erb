@@ -10,7 +10,7 @@
 
 
 <div class="updateStatus">
-<%unless @articles.empty?%>
+<%unless @articles.blank?%>
 
 <div class="questionTabele">
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -33,7 +33,7 @@
 <td class="thirdblock">
 <%= link_to t('article_list.view'), {:controller=>"article", :action => "index", :articles => article.title}, :id => "article_list_#{article.id}" %>
 </td>
-<%if current_user.role_id == 1 or current_user.id == article.user_id%>
+<%if current_user.role.name == "admin" or current_user.id == article.user_id%>
 <td><%= link_to image_tag("edit.png", :alt=>"Edit"), :controller=>"article", :action => "edit", :id => article.id %></td>
 <td><%=link_to image_tag("del.png", :alt=>"Remove"), {:controller=>"article", :action => "delete", :id=>article.id}, :confirm => "Are you sure?"%></td>
 <%else%>

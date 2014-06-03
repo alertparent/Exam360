@@ -14,7 +14,7 @@
 
 <%if @setting.examineeApprove == 1%>
 <div class="updateStatus">
-	<%unless @registered_examinees.empty?%>
+	<%unless @registered_examinees.blank?%>
 	<div class="qestionhead">
 		<h3><%= t('welcome.reg_examinees')%></h3>	
 		<%= render :partial=>"users/pageLinks"%>

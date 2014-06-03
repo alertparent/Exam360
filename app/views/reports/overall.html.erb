@@ -1,10 +1,10 @@
-<% unless @allYears == nil or @allYears.empty?%>
+<% unless @allYears == nil or @allYears.blank?%>
 <div id="container" style="width:700px; height:400px;"></div>
 <%end%>
 <div style="color: #5C5C5C; float: left; font-weight: bold; padding: 0 0 12px; width: 100%; font-size:14px;"><%= t('general.filter')%></div>
 
 <div class="formContainer">
-     <% form_tag overall_path,:method=>"get", :id=>"question_filter", :class=>"assign_examinee" do -%>
+     <%= form_tag overall_path,:method=>"get", :id=>"question_filter", :class=>"assign_examinee" do -%>
             
 			<div style="float:left; padding:0; margin:0 15px 0 0; width:auto;">
 			<label  style="width:110px; float:left; line-height: 21px;"><%=t('exam.yr')%>:</label>
@@ -22,7 +22,7 @@
 <% if @organization_id == 1 or @organization_id == 2 %>
      <div class="updateStatus">
      <h2><%=t('reports.overall')%></h2>
-	 <% unless @allYears.empty? or @allYears == nil%>
+	 <% unless @allYears.blank? or @allYears == nil%>
      <table border="0" cellspacing="0">
      <tr class="updateHeader">
      <th><%=@organization_id == 1 ? t('org.class') : t('org.course')%></th>
@@ -67,7 +67,7 @@
 <% if @organization_id == 3 or @organization_id == 4 %>
      <div class="updateStatus">
      <h2><%=t('reports.overall')%></h2>
-	 <% unless @allYears.empty? or @allYears == nil%>
+	 <% unless @allYears.blank? or @allYears == nil%>
      <table border="0" cellspacing="0">
      <tr class="updateHeader">
      <th><%=t('org.course')%></th>

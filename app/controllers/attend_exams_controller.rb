@@ -234,7 +234,7 @@ class AttendExamsController < ApplicationController
      
       @examAttended=Categoryexamuser.find_by_categoryuser_id_and_categoryexam_id(params[:categoryuser_id].to_i,params[:categoryexam_id].to_i)
       userQuestionset = @examAttended.question_set
-      unless userQuestionset.empty?
+      unless userQuestionset.blank?
 
       sql = "SELECT E.name,E.exam_code,A.exam_date,A.time_hour,A.time_min,E.total_time,E.examstart_time FROM categoryexamusers A Inner Join categoryexams B on A.categoryexam_id = B.id 
       Inner Join categoryusers C on A.categoryuser_id = C.id

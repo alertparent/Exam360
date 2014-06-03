@@ -30,7 +30,7 @@
       <%= render :partial => "breadcrumbs" %>
 	</div> 
 
-<% unless @folders.empty? and @being_shared_folders.empty? and @assets.empty?%>
+<% unless @folders.blank? and @being_shared_folders.blank? and @assets.blank?%>
     <div class="file_wrapper">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -79,7 +79,7 @@
 
 			<div id="invitation_form" class="invitation_form" title="Invite others to share" style="display:none; width:96%!important">  
 		    <div class="titles" style="color:#db3939; font-style:italic;  text-align:center; font-size:14px; padding-top: 10px;"></div>
-		    <% form_tag '/assets/share' do -%>  
+		    <%= form_tag '/assets/share' do -%>  
 		            <label for="email_addresses"  class="float-left" style="margin:6% 0">Enter recipient email addresses here</label><br />  
 		            <%= text_area_tag 'email_addresses', "", :class => 'text ui-widget-content ui-corner-all emails', :id=>folder.id, :style=>"height:50px; width:300px; float:right"%>  
 		            <br /><br /> 

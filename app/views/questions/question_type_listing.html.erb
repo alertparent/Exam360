@@ -2,7 +2,7 @@
 <legend><%=t('question.select_qtype_cat')%></legend>
 
 
-   <% form_tag({:action => "new"}, {:id => "class_form"}) do %>
+   <%= form_tag({:action => "new"}, {:id => "class_form"}) do %>
    
 	<span style="width: 130px; float: left;"><%=t('question.select_q_type')%>:</span>
 	<%= select_tag "question_type", options_for_select(@question_types.collect{ |q| [t("question_types.qt#{q.id}"), q.id] }), :style=>"width:150px; height:19px; border:#d1d1d1 1px solid;"%>

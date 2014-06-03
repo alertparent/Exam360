@@ -52,7 +52,7 @@
 </div>
 
 <h2><%=t('exam.cat')%></h2>
-<%unless @c.empty?%>
+<%unless @c.blank?%>
 <div class="updateStatus">
 <span id="collectCategory"><%=render :partial=>"collect_category"%></span>
 <%= submit_tag t('general.assign'), :id=>"assign", :class=>'btnBg' %>  

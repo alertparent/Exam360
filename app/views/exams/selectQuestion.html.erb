@@ -1,6 +1,6 @@
 
 <br>
-<% form_tag selectQuestion_path, :method=>"get",:remote=>true, :id=>"question_filter", :class=>"assign_question floatL w100pc mb15" do -%>
+<%= form_tag selectQuestion_path, :method=>"get",:remote=>true, :id=>"question_filter", :class=>"assign_question floatL w100pc mb15" do -%>
 <%=hidden_field_tag "flag", "f"%>
 
 <h2><%=t('general.filter')%></h2>
@@ -27,7 +27,7 @@
 </div><br><br><br>
 <%end%>
 
-<% form_tag selectQuestion_path, :method => :get,:remote=>true, :class => 'submitCategory',:id => "class_form1" do %>
+<%= form_tag selectQuestion_path, :method => :get,:remote=>true, :class => 'submitCategory',:id => "class_form1" do %>
 <%=hidden_field_tag "flag", "c"%>
 <%=hidden_field_tag "question_type", @question_type_id, :class=>"qType"%>
 <%=hidden_field_tag "category_type", @category_type, :class=>"cType"%>
@@ -60,7 +60,7 @@
 <%end%>
 
 <div class="updateStatus floatL w100pc mb15">
-<% form_tag assignQustions_path, :method=>"get", :id=>"class_form", :class=>"assign_question" do -%>
+<%= form_tag assignQustions_path, :method=>"get", :id=>"class_form", :class=>"assign_question" do -%>
 <p class="showComment" style="color:#db3939; font-style:italic;  text-align:center; font-size:14px; display:inline"></p>
 <%=hidden_field_tag "question_type", @question_type_id, :class=>"qType", :id=>"pass_qtype"%>
 <%=hidden_field_tag "category_type", @category_type, :class=>"cType", :id=>"pass_ctype"%>

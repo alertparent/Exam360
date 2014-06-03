@@ -17,7 +17,7 @@ Given "I have a rails application" do
       """
     And I save the following as "app/views/users/new.html.erb"
       """
-      <% form_for @user, :html => { :multipart => true } do |f| %>
+      <%= form_for @user, :html => { :multipart => true } do |f| %>
         <%= f.text_field :name %>
         <%= f.file_field :avatar %>
         <%= submit_tag "Submit" %>

@@ -1,5 +1,5 @@
-	       	<%unless @category_user == nil or @category_user.empty? or @manual == '0' %>
-			<% form_tag evaluate_path,:method=>"get",:remote=>true, :id=>"formID1", :class=>"examinees" do -%>
+	       	<%unless @category_user == nil or @category_user.blank? or @manual == '0' %>
+			<%= form_tag evaluate_path,:method=>"get",:remote=>true, :id=>"formID1", :class=>"examinees" do -%>
             <%=hidden_field_tag "flag",'q'%>
 			
 				<%=hidden_field_tag "examCategory",@category_id%>

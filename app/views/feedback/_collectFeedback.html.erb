@@ -2,8 +2,8 @@
 <div class="qestionhead"><h3><%if @question_type_id%><%=@question_type_name%> <%=t('general.questions')%><%else%><%=t('question.all_question')%><%end%> </h3>
 <p class="showComment paginationDiv floatR" style="color:#db3939; font-style:italic; font-size:14px; display:inline"></p>
 </div>
-<% unless @questions.empty?%>
-<% form_tag assign_path, :method=>"get", :id=>"class_form", :class=>"assign_question" do -%>
+<% unless @questions.blank?%>
+<%= form_tag assign_path, :method=>"get", :id=>"class_form", :class=>"assign_question" do -%>
 
 <div class="questionTabele">
 <table border="0" cellspacing="0">

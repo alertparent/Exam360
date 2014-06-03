@@ -108,7 +108,7 @@ module ActionView
       #   # => <span class="inputError">Title simply can't be empty (or it won't work).</span>
       def error_message_on(object, method, *args)
         options = args.extract_options!
-        unless args.empty?
+        unless args.blank?
           ActiveSupport::Deprecation.warn('error_message_on takes an option hash instead of separate ' +
             'prepend_text, append_text, html_tag, and css_class arguments', caller)
 

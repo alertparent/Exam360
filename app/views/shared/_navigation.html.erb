@@ -2,11 +2,11 @@
     <div class="nav">
       <ul id="nav" class="dropdown dropdown-linear">
     
-              <%if current_user and (current_user.role_id == 1 or current_user.role_id == 2)%>
+              <%if current_user and (current_user.role.name == "admin" or current_user.role.name == "examiner")%>
               
               <li class="dir">
                 <%=link_to(content_tag('span',t('general.users')), :action=>'user_management', :controller=>'welcome') %>
-                      <%if current_user.role_id == 1%>
+                      <%if current_user.role.name == "admin"%>
                     <ul>
                       <li><%= link_to t('general.confirm_reject_user'), :action=>'admin_dashboard', :controller=>'welcome'%></li>
                       <li style="padding:5px 5px 0 5px">|</li>
@@ -22,7 +22,7 @@
                       <li style="padding:5px 5px 0 5px">|</li>                                 
                     </ul>
                   <%end%>
-                  <%if current_user.role_id == 2%>
+                  <%if current_user.role.name == "examiner"%>
                     <ul>
                       <li><%= link_to t('welcome.q_setter'), :action=>'index', :controller=>'users', :create_id => 3%></li>
                       <li style="padding:5px 5px 0 5px">|</li>
@@ -116,7 +116,7 @@
 
                     </ul>
               </li>
-                  <%if current_user.role_id == 1 %>
+                  <%if current_user.role.name == "admin" %>
                   <li>
                     <%=link_to(content_tag('span',t('general.settings')), :action=>'index', :controller=>'settings') %>
                       <ul>
@@ -133,7 +133,7 @@
                   <%=link_to(content_tag('span',t('general.email')), :action=>'index', :controller=>'emails') %>
                   </li>
                   <%end%>
-                  <%if current_user.role_id == 1 or current_user.role_id == 2%>
+                  <%if current_user.role.name == "admin" or current_user.role.name == "examiner"%>
                   <li>
                     <%=link_to(content_tag('span',t('general.reports')), :action=>'index', :controller=>'reports') %>
                      <ul>
@@ -151,7 +151,7 @@
                      </ul>
                   </li> 
                   <%end%>
-                  <%if current_user.role_id == 1 %>
+                  <%if current_user.role.name == "admin" %>
                   <li>
                     <%=link_to(content_tag('span',t('general.feedback')), :action=>'index', :controller=>'feedback') %>
                     <ul>
@@ -176,7 +176,7 @@
                      </ul>
                </li>
                        <li>
-                <%if current_user and current_user.role_id == 1%>
+                <%if current_user and current_user.role.name == "admin"%>
                 <%=link_to(content_tag('span',t('general.feedback')), :action=>'index', :controller=>'feedback') %>
                 <%elsif current_user and current_user.role_id == 4%>
                 <%=link_to(content_tag('span',t('general.feedback')), :action=>'viewFeedback', :controller=>'feedback') %>              

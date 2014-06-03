@@ -853,7 +853,7 @@ class ReportsController < ApplicationController
 
 
    def departmentReport
-     #@c = Category.find(:all).paginate(:page => params[:page], :per_page => 10)
+     #@c = Category.all.paginate(:page => params[:page], :per_page => 10)
      @c = Category.where(['organization_id = ?',@organization_id])
       @category_id = params[:examCategory].to_i
       @yrs = Array.new(10){|i| Date.current.year-i}
@@ -1627,7 +1627,7 @@ class ReportsController < ApplicationController
      if @organization_id == 1 or @organization_id == 2
       unless academicYear >= 1
              eType = Examtype.where(["organization_id = ?",@organization_id])
-        unless eType.empty?
+        unless eType.blank?
              examtypeFirst = Examtype.where(["organization_id = ?",@organization_id]).first.id
              @examtype_id = examtypeFirst
         else
@@ -1710,7 +1710,7 @@ class ReportsController < ApplicationController
       unless academicYear >= 1
         
        eType = Examtype.where(["organization_id = ?",@organization_id])
-        unless eType.empty?
+        unless eType.blank?
              examtypeFirst = Examtype.where(["organization_id = ?",@organization_id]).first.id
              @examtype_id = examtypeFirst
         else

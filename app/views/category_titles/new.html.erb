@@ -3,7 +3,7 @@
 <legend><%=t('general.create')%> <%=@name%></legend>
 
 
-<% form_tag({:action => "create"}, {:id => "class_form"}) do %>
+<%= form_tag({:action => "create"}, {:id => "class_form"}) do %>
 
     <%=render :partial=>"add_titles"%>
 	

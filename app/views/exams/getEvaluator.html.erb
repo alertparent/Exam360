@@ -48,7 +48,7 @@
 
 <h2><%=t('general.select_cat')%>:</h2>
 <div class="formContainer">
-	<% form_tag getEvaluator_path,:method=>"get",:remote=>true, :id=>"class_form", :class=>"assign_examinee" do -%>
+	<%= form_tag getEvaluator_path,:method=>"get",:remote=>true, :id=>"class_form", :class=>"assign_examinee" do -%>
 
             
 			<span id="select_category"><%=render :partial=>"select_category_evaluator"%></span><br>
@@ -57,7 +57,7 @@
 </div>
 
 <div class="updateStatus examineeList floatL w100pc">
-<% form_tag assignEvaluator_path,:method=>:post, :id=>"formID2", :class=>"assign_examinee" do -%>
+<%= form_tag assignEvaluator_path,:method=>:post, :id=>"formID2", :class=>"assign_examinee" do -%>
 <%=hidden_field_tag "examId" %>	
 <%#=hidden_field_tag "categoryId"%>
 

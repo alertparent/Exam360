@@ -19,7 +19,7 @@ class ResultsController < ApplicationController
     
     @examTypes = Examtype.where(['organization_id = ?',@organization_id])
     @yrs = Array.new(10){|i| Date.current.year-i}
-    unless @categories.empty?
+    unless @categories.blank?
     @category_user = Categoryuser.find(:all, :joins=> "INNER JOIN categories ON categories.id = categoryusers.category_id  AND categoryusers.user_id = #{@currentUser.id} AND categories.organization_id = #{@organization_id}")
     end
     if current_user.role_id == Examinee      

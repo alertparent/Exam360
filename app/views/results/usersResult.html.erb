@@ -3,7 +3,7 @@
 
 <h2><%=t('result.examinees_result')%>:</h2>
 <div class="formContainer">
-     <% form_tag usersResult_path,:method=>"get", :id=>"class_form", :class=>"assign_examinee" do -%>
+     <%= form_tag usersResult_path,:method=>"get", :id=>"class_form", :class=>"assign_examinee" do -%>
             <table class="formTable" style="border:0px;">
             <tr>
             <td> 
@@ -33,7 +33,7 @@
 
 <span id="collectUser">
   <%unless @category_id == 0%>	
-	<%unless @category_user.empty?%>
+	<%unless @category_user.blank?%>
 	<%=render :partial=>"collect_users"%>
 	<%else%>
 	<%=t('not_found.no_examinees')%>

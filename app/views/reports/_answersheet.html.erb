@@ -117,7 +117,7 @@
 					</tr>
 					<%end%>
 				<%end%>
-				<%unless @options.empty? || @optionA.empty?%>
+				<%unless @options.blank? || @optionA.blank?%>
 					<tr>
 						<td valign="top" width="132px">Options</td><td valign="top" width="12px">:</td>
 				        <%if @question.question_type_id == 11%>
@@ -128,21 +128,21 @@
 				    </tr>
 			    <%end%>
 			    
-			    <%unless @matchOption.empty?%>
+			    <%unless @matchOption.blank?%>
 				    <tr>
 						<td valign="top" width="132px">Match Options</td><td valign="top" width="12px">:</td>
 				        <td width="650px" valign="top"><%=raw @matchOption.join(",")%></td>
 				    </tr>
 			    <%end%>
 			    
-			    <%unless @ans.empty? || @ans[0] == nil%>
+			    <%unless @ans.blank? || @ans[0] == nil%>
 				    <tr>
 				    	<td valign="top" width="132px">Your Answer</td><td valign="top" width="12px">:</td>
 				        <td width="650px" valign="top"><%=raw @ans.join(",")%></td>
 				    </tr>
 			    <%end%>
 			    
-			    <%unless @actual.empty?%>
+			    <%unless @actual.blank?%>
 				    <tr>
 				    	<td valign="top" width="132px">Actual Answer</td><td valign="top" width="12px">:</td>
 			        	<td width="650px" valign="top"><%=raw @actual.join(",")%></td>

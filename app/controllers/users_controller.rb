@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       @value = Examinee
     end
     @user = User.new
-    @roles = Role.find(:all)
+    @roles = Role.all
   end
   
   def create
@@ -133,13 +133,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     categoryuser = Categoryuser.where(['user_id = ?',@user.id])
       if @user.role_id == 4
-        if categoryuser.empty?
+        if categoryuser.blank?
            @user.destroy
            flash[:success] = t('flash_success.examinee_del')
         else
            flash[:notice] = t('flash_notice.examinee_cant')
        end
-      elsif @user.role_id == 2
+      elsif @user.role.name == "examiner"
            @user.destroy
            flash[:success] = t('flash_success.examiner_del')
       elsif @user.role_id == 3

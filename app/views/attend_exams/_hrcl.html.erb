@@ -1,4 +1,4 @@
-		  <%if @checkAttended.empty?%>
+		  <%if @checkAttended.blank?%>
 		  <%= hidden_field_tag "question_type_id", @question.question_type_id%>	
 	      <%= hidden_field_tag "question_id", @question.id%>
                 <%@sub_questions = Question.where(["parent_id = ?", @question.id]).sort! { |a,b| a.sort_order <=> b.sort_order }%>

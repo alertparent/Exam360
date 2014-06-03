@@ -1,11 +1,11 @@
-<% unless @allYears.empty?%>
+<% unless @allYears.blank?%>
 <div id="container" style="width:700px; height:400px;"></div>
 <%end%>
 
 <% if @organization_id == 1 %>
 	<div class="updateStatus">
 	<h2><%=t('reports.overall')%></h2>
-	<% unless @allYears.empty?%>
+	<% unless @allYears.blank?%>
 	<table border="0" cellspacing="0">
 	<tr class="updateHeader">
 	<th><%=t('org.class')%></th>
@@ -52,7 +52,7 @@
 <% if @organization_id == 2 %>
 	<div class="updateStatus">
 	<h2><%=t('reports.overall')%></h2>
-	<% unless @allYears.empty?%>
+	<% unless @allYears.blank?%>
 	<table border="0" cellspacing="0">
 	<tr class="updateHeader">
 	<th><%=t('org.course')%></th>

@@ -9,7 +9,7 @@
 class ImagesController < ApplicationController
   filter_access_to :all
   def index
-    @images = Image.find(:all)
+    @images = Image.all
   end
 
   def new

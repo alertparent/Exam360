@@ -1,7 +1,7 @@
 
 <h2><%=t('general.filter')%></h2>
 <div class="formContainer">
-	     <% form_tag '/questions', :method=>"get",:remote=>true, :id=>"class_form", :class=>"assign_question" do -%>
+	     <%= form_tag '/questions', :method=>"get",:remote=>true, :id=>"class_form", :class=>"assign_question" do -%>
             <table class="formTable" style="border:0px;">
               <tr>
                 <td>

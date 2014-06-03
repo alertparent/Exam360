@@ -9,7 +9,7 @@ class Folder < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [:parent_id], :message=>" already exists!"
   
   def shared?  
-    !self.shared_assets.empty?  
+    !self.shared_assets.blank?  
   end
   
 end

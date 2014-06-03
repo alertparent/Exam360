@@ -207,7 +207,7 @@ class CategoryTitlesController < ApplicationController
       
       if @categoryType == "1" or @categoryType == "3"
         categories = Category.where(["course_id = ?", @category_id])
-        if categories.empty?
+        if categories.blank?
           @course = Course.find_by_id(@category_id)
           @course.destroy
           render :text => true
@@ -218,7 +218,7 @@ class CategoryTitlesController < ApplicationController
       
       if @categoryType == "4"
         categories = Category.where(["academic_year_id = ?", @category_id])
-        if categories.empty?
+        if categories.blank?
         @academicYear = AcademicYear.find_by_id(@category_id)
         @academicYear.destroy
           render :text => true
@@ -229,7 +229,7 @@ class CategoryTitlesController < ApplicationController
 
       if @categoryType == "2" 
         categories = Category.where(["section_id = ?", @category_id])
-        if categories.empty?
+        if categories.blank?
         @section = Section.find_by_id(@category_id)
         @section.destroy
           render :text => true
@@ -240,7 +240,7 @@ class CategoryTitlesController < ApplicationController
       
       if @categoryType == "6" 
         categories = Category.where(["semester_id = ?", @category_id])
-        if categories.empty?
+        if categories.blank?
         @semester = Semester.find_by_id(@category_id)
         @semester.destroy
           render :text => true
@@ -251,7 +251,7 @@ class CategoryTitlesController < ApplicationController
       
       if @categoryType == "5" or @categoryType == "7" or @categoryType == "8"
         categories = Category.where(["department_id = ?", @category_id])
-        if categories.empty?
+        if categories.blank?
         @department = Department.find_by_id(@category_id)
         @department.destroy
           render :text => true

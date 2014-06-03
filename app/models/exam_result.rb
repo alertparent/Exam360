@@ -49,7 +49,7 @@ class ExamResult < ActiveRecord::Base
              
              getMarks = ExamResult.find_by_sql(marks)
              
-            unless getMarks.empty?
+            unless getMarks.blank?
              getMarks.each do |g|
                unless g.score == nil
                  return g.score.to_f.round(2)
@@ -82,7 +82,7 @@ class ExamResult < ActiveRecord::Base
                   Group By F.id,S.id,U.name,S.name,E.attempt,S.total_mark,E.percent,E.status;"
              
              getMarks = ExamResult.find_by_sql(marks)
-            unless getMarks.empty?
+            unless getMarks.blank?
              getMarks.each do |g|
                unless g.score == nil
                  return g.score.to_f.round(2)
@@ -111,7 +111,7 @@ class ExamResult < ActiveRecord::Base
                   Group By F.id,S.id,U.name,S.name,E.attempt,S.total_mark,E.percent;"
              
             getMarks = ExamResult.find_by_sql(marks)
-            unless getMarks.empty?
+            unless getMarks.blank?
              getMarks.each do |g|
                unless g.score == nil
                  return g.score.to_f.round(2)

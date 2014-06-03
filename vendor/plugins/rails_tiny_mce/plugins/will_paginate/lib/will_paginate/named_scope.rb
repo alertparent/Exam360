@@ -5,7 +5,7 @@ module WillPaginate
   # but in other aspects when managing complex conditions that you want to be reusable.
   module NamedScope
     # All subclasses of ActiveRecord::Base have two named_scopes:
-    # * <tt>all</tt>, which is similar to a <tt>find(:all)</tt> query, and
+    # * <tt>all</tt>, which is similar to a <tt>all</tt> query, and
     # * <tt>scoped</tt>, which allows for the creation of anonymous scopes, on the fly:
     #
     #   Shirt.scoped(:conditions => {:color => 'red'}).scoped(:include => :washing_instructions)
@@ -125,7 +125,7 @@ module WillPaginate
       end
 
       def load_found
-        @found = find(:all)
+        @found = all
       end
     end
   end

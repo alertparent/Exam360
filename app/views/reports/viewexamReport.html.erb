@@ -1,10 +1,10 @@
-<%unless @results.empty?%>
+<%unless @results.blank?%>
 <div id="chart-container-1" style="width:700px; height:350px;"></div>
 <%end%>
 <% i = 1%>
 <div class="updateStatus">
 <h2><%=t('general.result')%></h2>
-<%unless @results.empty?%>
+<%unless @results.blank?%>
 <table border="0" cellspacing="0">
 <tr class="updateHeader">
 <th><%=t('reports.s_no')%></th>

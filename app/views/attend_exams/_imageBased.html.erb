@@ -10,7 +10,7 @@
 			<div class="clear"></div>
 						
 		  <%checkAttended = Evaluation.where(["question_id = ? and categoryexam_id = ? and categoryuser_id = ? and has_attended = ? and attempt = ?", @question.id,@categoryExam,@categoryUser,true,@attempt])%>
-		  <%unless checkAttended.empty?%>
+		  <%unless checkAttended.blank?%>
  
 		     <table class="answer_name" id="toggle_<%=@question.id%>">
 			 	<tr><th></th></tr>

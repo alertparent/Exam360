@@ -91,7 +91,7 @@
 	
 <div class="updateStatus">	
 
-      <%unless @examQuestions.empty?%>
+      <%unless @examQuestions.blank?%>
 			<table  cellspacing="0" border="0">
 			<tr class="updateHeader">
 				<th><%=t('question.ques')%></th>
@@ -122,7 +122,7 @@
 <div class="updateStatus"><h3 class="m0_P25"><span class="toggleExaminee"> <%=image_tag("plus_icon.png", :alt=>"Expand", :height=>"20", :width=>'20')%>  </span><%=t('user.examinees')%></h3></div>
 <div class="toggleExamineeForm" style=" display:none; width:100%; clear:left;">
 <div class="updateStatus">	
-        <%unless @examUsers.empty?%> 
+        <%unless @examUsers.blank?%> 
 		 
 			<table  cellspacing="0" border="0">
 				<tr class="updateHeader">

@@ -1,6 +1,6 @@
 <h2><%=t('email.edit_email')%></h2>
 
-<% form_for @email_template, :html => { :id => "class_form"} do |f| %>
+<%= form_for @email_template, :html => { :id => "class_form"} do |f| %>
   <%= f.error_messages %>
   
     <label><%=t('email.english_content')%></label><br><br>

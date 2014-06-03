@@ -3,7 +3,7 @@
 
 <div class="formBg">
 			<p class="linkGroup">
-			<%unless @clients.empty?%>
+			<%unless @clients.blank?%>
 			  <% @clients.each do|client|%>
 			  	<p class="about_virtualx_inner"><%=link_to client.name, client.url%></p><br />
 			  <%end%>

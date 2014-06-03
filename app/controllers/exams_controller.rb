@@ -90,7 +90,7 @@ class ExamsController < ApplicationController
     @exam = Exam.find(params[:id])
     examquestions = Examquestion.where(["exam_id = ?",@exam.id])
     categoryexams = Categoryexam.where(["exam_id = ?",@exam.id])
-    if examquestions.empty? and examquestions.empty? #and examusers.empty?
+    if examquestions.blank? and examquestions.blank? #and examusers.blank?
       @exam.destroy
       flash[:success] = t('flash_success.exam_deleted')
       respond_to do |format|
@@ -197,7 +197,7 @@ class ExamsController < ApplicationController
     @nms = [2011,2010,2009]
     @examTypes = Examtype.where(['organization_id = ?',@organization_id])
     @categories = Category.find(:all, :conditions=>["organization_id = ?", @organization_id])
-    @category_subject = Categorysubject.find(:all)
+    @category_subject = Categorysubject.all
     @examNames = []
     @fetchQuestions = params[:fectchmark].to_i
     @categoryId = params[:categoryId].to_i
@@ -554,7 +554,7 @@ class ExamsController < ApplicationController
     @examtype = Examtype.find(params[:examtype_id].to_i)
     categoryexam = Categoryexam.where(["examtype_id = ?", params[:examtype_id].to_i])
 
-    if categoryexam.empty?
+    if categoryexam.blank?
       if @examtype.destroy
        flash[:success] = t('flash_success.examtype_deleted')
        redirect_to :action=> :listExamtypes
@@ -609,7 +609,7 @@ class ExamsController < ApplicationController
     end
     
     def evaluate      
-      if current_user.role_id == 1 or current_user.role_id == 2
+      if current_user.role.name == "admin" or current_user.role.name == "examiner"
         @c = Category.where(['organization_id = ?',@organization_id])
         @yrs = Array.new(10){|i| Date.current.year-i}
         @examTypes = Examtype.where(['organization_id = ?',@organization_id])
@@ -657,7 +657,7 @@ class ExamsController < ApplicationController
        @evaluator = EvaluateExam.find_by_user_id_and_exam_id(current_user.id,@examname) 
            unless @flag == 'eval'
              unless @evaluator == nil
-                unless @category_user == nil or @category_user.empty?
+                unless @category_user == nil or @category_user.blank?
                   @category_user.each do|exam|
                    @manual = exam.evaluation
                   end
@@ -666,8 +666,8 @@ class ExamsController < ApplicationController
                 @notallowed = "n"
              end
           end
-      elsif current_user.role_id == 1 or current_user.role_id == 2
-        unless @category_user == nil or @category_user.empty?
+      elsif current_user.role.name == "admin" or current_user.role.name == "examiner"
+        unless @category_user == nil or @category_user.blank?
          @category_user.each do|exam|
            @manual = exam.evaluation
          end
@@ -731,7 +731,7 @@ class ExamsController < ApplicationController
       if params[:finish] == 'f'
        
       @evaluation = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ? and evaluate = ?",params[:categoryexam].to_i,params[:categoryuser].to_i,params[:attempt].to_i,1])
-      if @evaluation.empty?
+      if @evaluation.blank?
         calculateScore
         userStatus
       @examComplete = params[:finish]
@@ -758,7 +758,7 @@ class ExamsController < ApplicationController
         end
       end
       
-      unless @descriptive.empty?#@question.question_type_id == 12
+      unless @descriptive.blank?#@question.question_type_id == 12
         render :json => {:question=>true}
       else
         render :json => {:question=>false}
@@ -776,7 +776,7 @@ class ExamsController < ApplicationController
   
     def finishEvaluation
       @evaluation = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ? and evaluate = ?",params[:categoryexam].to_i,params[:categoryuser].to_i,params[:attempt].to_i,1])
-      if @evaluation.empty?
+      if @evaluation.blank?
         calculateScore
         render :json => {:evaluated=>true}
       else
@@ -821,7 +821,7 @@ class ExamsController < ApplicationController
       examtype_id = params[:examtype_id].to_i
       academicYear = params[:year].to_i
       @exams = Exam.find(:all, :joins=> "INNER JOIN categoryexams ON categoryexams.exam_id = exams.id AND categoryexams.category_id = #{category_id} AND categoryexams.examtype_id = #{examtype_id} AND categoryexams.currentyear = #{academicYear}")
-      if @exams.empty?
+      if @exams.blank?
         @exams = []
       end
      render :json => {:examNames=>@exams} 
@@ -902,7 +902,7 @@ class ExamsController < ApplicationController
        else
 
        @exam = Exam.find(params[:exam].to_i)
-       @evaluators = @exam.users.find(:all).paginate(:page => params[:page], :per_page => 20)
+       @evaluators = @exam.users.all.paginate(:page => params[:page], :per_page => 20)
        
        end
      

@@ -9,7 +9,7 @@
 class ClientinfoController < ApplicationController
   filter_access_to :all
   def index
-        @clientinfo = Clientinfo.find(:all)
+        @clientinfo = Clientinfo.all
   end
   
     def new

@@ -12,7 +12,7 @@ class IntegrationTest < Test::Unit::TestCase
 
     should "not exceed the open file limit" do
        assert_nothing_raised do
-         dummies = Dummy.find(:all)
+         dummies = Dummy.all
          dummies.each { |dummy| dummy.avatar }
        end
     end
@@ -439,7 +439,7 @@ class IntegrationTest < Test::Unit::TestCase
     def s3_headers_for attachment, style
       `curl --head "#{attachment.url(style)}" 2>/dev/null`.split("\n").inject({}) do |h,head|
         split_head = head.chomp.split(/\s*:\s*/, 2)
-        h[split_head.first.downcase] = split_head.last unless split_head.empty?
+        h[split_head.first.downcase] = split_head.last unless split_head.blank?
         h
       end
     end

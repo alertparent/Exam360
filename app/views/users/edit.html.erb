@@ -1,6 +1,6 @@
 <h2><%=t('user.edit')%></h2>
 <fieldset class="formContainer">
-<% form_for @user , :html => { :id => "class_form"} do |f| %>
+<%= form_for @user , :html => { :id => "class_form"} do |f| %>
 <table class="formTable">
 <tr>
 <td width="120px;"><%= f.label :name %></td>

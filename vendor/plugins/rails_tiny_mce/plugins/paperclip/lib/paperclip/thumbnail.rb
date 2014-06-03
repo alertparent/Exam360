@@ -38,7 +38,7 @@ module Paperclip
 
     # Returns true if the image is meant to make use of additional convert options.
     def convert_options?
-      !@convert_options.nil? && !@convert_options.empty?
+      !@convert_options.nil? && !@convert_options.blank?
     end
 
     # Performs the conversion of the +file+ into a thumbnail. Returns the Tempfile
@@ -71,7 +71,7 @@ module Paperclip
     def transformation_command
       scale, crop = @current_geometry.transformation_to(@target_geometry, crop?)
       trans = []
-      trans << "-resize" << %["#{scale}"] unless scale.nil? || scale.empty?
+      trans << "-resize" << %["#{scale}"] unless scale.nil? || scale.blank?
       trans << "-crop" << %["#{crop}"] << "+repage" if crop
       trans
     end

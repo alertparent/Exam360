@@ -1,5 +1,5 @@
 <h1><%=t('article_new.subcategories')%>: <%= @category.name %></h1>
-<%unless @subcategories.empty?%>
+<%unless @subcategories.blank?%>
 <% @subcategories.each do |subcategory| %>
     <strong><%= subcategory.created_at.try(:strftime,"%B %d %Y %H:%M %p") %></strong>
     <div style="margin-left:100px">

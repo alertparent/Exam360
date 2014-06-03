@@ -16,7 +16,7 @@
 #          if @user_session.save and @login_user.is_approved == 1 and @login_user.confirmed == true      
 #             @current_user = current_user
 #             @role_id = @current_user.role_id      
-#             if @role_id == 1 || @role_id == 2
+#             if @role.name == "admin" || @role.name == "examiner"
 #               redirect_to :action=>:workflow, :controller=>:welcome
 #             elsif @role_id == 3
 #               redirect_to :action=>:index, :controller=>:questions

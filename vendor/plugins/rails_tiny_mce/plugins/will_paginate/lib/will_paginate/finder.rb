@@ -70,7 +70,7 @@ module WillPaginate
           # an array of IDs may have been given:
           total_entries ||= (Array === args.first and args.first.size)
           # :all is implicit
-          args.unshift(:all) if args.empty?
+          args.unshift(:all) if args.blank?
         end
 
         WillPaginate::Collection.create(page, per_page, total_entries) do |pager|

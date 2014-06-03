@@ -23,7 +23,7 @@ class FinderTest < ActiveRecordTestCase
     assert_queries(2) do
       entries = Topic.paginate :page => 2
       assert_equal 1, entries.total_pages
-      assert entries.empty?
+      assert entries.blank?
     end
   end
 

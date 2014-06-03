@@ -71,7 +71,7 @@ class CategoriesController < ApplicationController
       categoruser = Categoryuser.where(["category_id = ?", params[:category_id].to_i])
       categorsubject = Categorysubject.where(["category_id = ?", params[:category_id].to_i])
       
-        if categorexam.empty? and categoruser.empty? and categorsubject.empty?
+        if categorexam.blank? and categoruser.blank? and categorsubject.blank?
            flash[:success] = t('flash_success.category_deleted') if category.destroy
         else
            flash[:notice] = t('flash_notice.category_cant')

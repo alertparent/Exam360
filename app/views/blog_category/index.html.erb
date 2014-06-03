@@ -1,5 +1,5 @@
 <h1><%=t('article_new.category')%> : <%= @category.name %></h1>
-<%unless @articles.empty?%>
+<%unless @articles.blank?%>
 <% @articles.each do |article| %>
     <strong><p class="fs12"></p><%= article.created_at.try(:strftime,"%B %d %Y %H:%M %p") %></p></strong>
     <div class="art_rep">

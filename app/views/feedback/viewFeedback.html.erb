@@ -1,6 +1,6 @@
 <div class="feedBackStatus">
 <h3><%=t('feedback.give_your')%></h3>
-<%unless @questions.empty?%>
+<%unless @questions.blank?%>
           <%@questions.each do|question|%>
           <% @question = question%>
 		  <%if @question.question_type_id == 7%>

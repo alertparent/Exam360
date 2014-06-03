@@ -121,7 +121,7 @@ end
     #  format.js {  
     #  }  
     #end 
-    unless email_addresses.empty?
+    unless email_addresses.blank?
       render :json => {:text=>true}
     else
       render :json => {:text=>false}

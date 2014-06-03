@@ -9,7 +9,7 @@
 </div>
 
 <%if @create_id == '4'%>
-    <% form_tag '/users',:remote=>true,:method=>"get",:id => "class_form" do -%><br><br>
+    <%= form_tag '/users',:remote=>true,:method=>"get",:id => "class_form" do -%><br><br>
         <h2><%=t('user.filter_temp')%></h2>
         <div class="formContainer">
                     <table class="formTable" style="border:0px;">
@@ -48,7 +48,7 @@
 <%= link_to t('user.temp_create'), :action=>'new', :controller=>'temporary_examinee'%> |
 <%end%>
 
-<%if current_user.role_id == 1 ||  current_user.role_id == 2%>
+<%if current_user.role.name == "admin" ||  current_user.role.name == "examiner"%>
 <%= link_to t('general.back'), :action=>'user_management', :controller=>'welcome'%>
 <%end%>
 

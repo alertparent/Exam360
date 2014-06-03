@@ -1,6 +1,6 @@
 <h2><%=t('result.exams_result')%>:</h2>
 <div class="formContainer">
-     <% form_tag examsResult_path,:method=>"get", :id=>"class_form", :class=>"assign_examinee" do -%>
+     <%= form_tag examsResult_path,:method=>"get", :id=>"class_form", :class=>"assign_examinee" do -%>
 
             <table class="formTable" style="border:0px;">
             <tr>
@@ -31,7 +31,7 @@
 
 <span id="collectUser">
   <%unless @category_id == 0%>	
-	<%unless @category_exam.empty?%>
+	<%unless @category_exam.blank?%>
 	<%=render :partial=>"collect_exams"%>
 	<%else%>
 	<%=t('not_found.no_examinees')%>

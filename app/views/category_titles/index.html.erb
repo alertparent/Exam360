@@ -1,6 +1,6 @@
 
 <h2><%=t('org.org_levels')%></h2>
-<%unless @category_types.empty?%>
+<%unless @category_types.blank?%>
 <% @category_types.each do |category_type| %>
 <%if category_type.id == 1%>
 <%=link_to t('org.class'), :action=>'index', :controller=>"category_titles", :type=>category_type.id%><br><br>
