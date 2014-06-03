@@ -61,11 +61,12 @@
 
 <div class="qestionhead_new">
 
-
+<% if @users.present? %>
 <%= will_paginate @users, 
                 :prev_label => t('general.previous'), 
                 :next_label => t('general.next'),
-                :page_links =>true,           
-                :renderer => PaginationListLinkRenderer
+                :page_links =>true           
+                # :renderer => PaginationListLinkRenderer
               %>
+<% end %>
 </div>
