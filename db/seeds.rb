@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first) 
+# => ---------------------------------------------------------------------------------------------------------------
 
 ["admin", "examiner", "questionsetter","examinee"].each do |r|  
   Role.find_or_create_by(:name=>r)
@@ -25,10 +26,21 @@ Setting.create!( :allow_examinee_registration => true, :confirm_exam=> true, :da
  end 
  
  
-   ["course,1,1","section,1,2","course,2,1","academic_year,2,2","department,2,3","semester,2,4","department,3,1","domain,4,1"] .each do |category|  
-     a,b,c = category.chomp.split(",")  
-     CategoryType.create!(:title => a, :organization_id => b, :sort_order=>c)  
-   end  
+   # ["course,1,1","section,1,2","course,2,1","academic_year,2,2","department,2,3","semester,2,4","department,3,1","domain,4,1"] .each do |category|  
+     # a,b,c = category.chomp.split(",")
+     school = Organization.find_by(:title=>"school")
+     university_college = Organization.find_by(:title=>"university/college")
+     organization = Organization.find_by(:title=>"organization")
+     training_center = Organization.find_by(:title=>"training_center")  
+     CategoryType.create!(:title => "course", :organization_id => school.id, :sort_order=>1)
+     CategoryType.create!(:title => "section", :organization_id => school.id, :sort_order=>2)
+     CategoryType.create!(:title => "course", :organization_id => university_college.id, :sort_order=>1)
+     CategoryType.create!(:title => "academic_year", :organization_id => university_college.id, :sort_order=>2)
+     CategoryType.create!(:title => "department", :organization_id => university_college.id, :sort_order=>3)
+     CategoryType.create!(:title => "semester", :organization_id => university_college.id, :sort_order=>4)
+     CategoryType.create!(:title => "department", :organization_id => organization.id, :sort_order=>1)
+     CategoryType.create!(:title => "domain", :organization_id => training_center.id, :sort_order=>1)  
+   # end  
 
  ["MultipleChoice", "MultipleSelection", "Fill in the blanks","Yes or No", "True or False", "Drag and Drop","Likert","Matrix","Image based","Hierarchical ordering","Matching","Descriptive"].each do |r|  
    QuestionType.find_or_create_by(:name=> r)  
