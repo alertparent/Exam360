@@ -1,19 +1,11 @@
-=begin
-  application_controller.rb
-  Description: Controller file for managing the application.
-  Created on: October 11, 2010
-  Last modified on: March 18, 2013
-  Copyright 2013 PIT Solutions Pvt. Ltd. All Rights Reserved.
-=end
-
 class ApplicationController < ActionController::Base
   
   before_filter :load_default_data
   
   helper :all  
-  protect_from_forgery
+  protect_from_forgery with: :exception
   
-  helper_method :current_user_session, :current_user    
+  # helper_method :current_user_session, :current_user    
   before_filter :set_locale, :set_time_zone
     
   def permission_denied  
@@ -42,17 +34,17 @@ class ApplicationController < ActionController::Base
       Time.zone = @app_setting.time_zone
     end
   
-    def current_user_session
-      logger.debug "ApplicationController::current_user_session"
-      return @current_user_session if defined?(@current_user_session)
-      @current_user_session = UserSession.find
-    end
+    # def current_user_session
+    #       logger.debug "ApplicationController::current_user_session"
+    #       return @current_user_session if defined?(@current_user_session)
+    #       @current_user_session = UserSession.find
+    #     end
  
-    def current_user
-      logger.debug "ApplicationController::current_user"
-      return @current_user if defined?(@current_user)
-      @current_user = current_user_session && current_user_session.user
-    end
+    # def current_user
+    #       logger.debug "ApplicationController::current_user"
+    #       return @current_user if defined?(@current_user)
+    #       @current_user = current_user_session && current_user_session.user
+    #     end
  
     def require_user
       logger.debug "ApplicationController::require_user"

@@ -1,9 +1,39 @@
 class User < ActiveRecord::Base
+  attr_accessible :name, :login, :email, :password, :password_confirmation,:role_id,:active
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  
+  
+  # t.string   "name"
+  # t.string   "login",                              null: false
+  # t.string   "email",                              null: false
+  # t.string   "crypted_password"
+  # t.string   "password_salt"
+  # t.string   "persistence_token",                  null: false
+  # t.string   "perishable_token",                   null: false
+  # t.integer  "login_count",        default: 0,     null: false
+  # t.string   "language",           default: "en"
+  # t.integer  "failed_login_count", default: 0,     null: false
+  # t.datetime "last_request_at"
+  # t.datetime "current_login_at"
+  # t.datetime "last_login_at"
+  # t.string   "current_login_ip"
+  # t.string   "last_login_ip"
+  # t.integer  "role_id"
+  # t.boolean  "confirmed",          default: false
+  # t.integer  "is_approved",        default: 0
+  # t.integer  "is_temp_examinee",   default: 0,     null: false
+  # t.boolean  "active",             default: true
+  # t.datetime "created_at"
+  # t.datetime "updated_at"
+  # t.integer  "is_registered",      default: 0
 
-       acts_as_authentic do |c|
-       c.require_password_confirmation = false
-       c.validate_password_field = false
-       end
+       # acts_as_authentic do |c|
+       #        c.require_password_confirmation = false
+       #        c.validate_password_field = false
+       #        end
   #scope :made_between, lambda{|from, to| where('created_date >= :from and created_date <= :to', :from => from, :to => to) }
   scope :conf_examiner_users, where(:role_id => 2, :confirmed => true).order('created_at desc')
   scope :conf_questionsetter_users, where(:role_id => 3, :confirmed => true).order('created_at desc')
@@ -104,7 +134,7 @@ class User < ActiveRecord::Base
   #this is to make sure the new user ,of which the email addresses already used to share folders by others, to have access to those folders  
   def check_and_assign_shared_ids_to_shared_folders      
       #First checking if the new user's email exists in any of ShareFolder records  
-      shared_folders_with_same_email = SharedFolder.find_all_by_shared_email(self.email)  
+      shared_folders_with_same_email = SharedFolder.find_by(:shared_email=>self.email)  
     
       if shared_folders_with_same_email        
         #loop and update the shared user id with this new user id   

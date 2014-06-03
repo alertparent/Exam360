@@ -6,14 +6,15 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first) 
 
- 
-User.create( :name => 'admin', :login => 'admin', :email => 'jacob@pitsolutions.com', :password => 'admin',:role_id=>1,:confirmed=>true,:is_approved=>1,:active=>true)
+["admin", "examiner", "questionsetter","examinee"].each do |r|  
+  Role.find_or_create_by(:name=>r)
+end
+
+role = Role.find_by(:name=>"admin")
+User.create( :name => 'admin', :login => 'admin', :email => 'admin@exam360.com', :password => 'admin123', :password_confirmation=>"admin123",:role_id=>role.id,:active=>true) if User.find_by(:email=>"admin@exam360.com").blank?
 
 Setting.create( :allow_examinee_registration => true, :confirm_exam=> true, :datetime_format=>'%m/%d/%Y', :locale=>'en', :show_hint_to_examinee => true )
 
- ["admin", "examiner", "questionsetter","examinee"].each do |r|  
-   Role.find_or_create_by(:name=>r)
- end 
 
 # ["t1", "t2", "t3", "t4", "t5", "t6","t7"].each do |r|  
 #   Email.find_or_create_by_section_id r  

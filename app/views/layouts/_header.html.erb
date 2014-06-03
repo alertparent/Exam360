@@ -26,7 +26,7 @@
         <p style="text-align:center; margin:0; padding:0 0 0 10px; width:1px;float:left">
             <%unless current_user.is_temp_examinee == 1%>
             	<span>|</span></p>
-            	<p><%=link_to t('home.edit_profile'), edit_user_path(current_user)%></p>
+            	<p><%=link_to t('home.edit_profile'), edit_user_registration_path(current_user)%></p>
             
             <%end%>
         

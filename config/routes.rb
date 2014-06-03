@@ -1,5 +1,28 @@
 Exam360::Application.routes.draw do
     
+  devise_for :users
+  
+  devise_scope :user do
+    # get "sign_in", to: "devise/sessions#new"
+    match 'login' => "user_sessions#new",      :as => :login,:via=> :all
+    match 'logout' => "user_sessions#destroy", :as => :logout,:via=> :all
+    # resources :users
+    get "users/show"
+
+    get "users/edit"
+
+
+    get "home/index"
+
+    get "user_sessions/new"
+  end
+  
+   
+  
+  # resources :user_sessions
+ 
+  
+  
   get "errors/not_found"  
     
   get "subcategory/index"
@@ -49,9 +72,9 @@ Exam360::Application.routes.draw do
 
   
   
-  resources :users do
-   get :autocomplete_user_name, :on => :collection
-  end
+  # resources :users do
+  #    get :autocomplete_user_name, :on => :collection
+  #   end
   
   resources :folders
   get "folders/index"
@@ -301,19 +324,7 @@ match '/delete_category' => 'categories#delete_category',:via=> :all
       match 'inactivate' => 'users#inactivate',:via=> :all
   #match 'users/tempexaminee' => 'users#new'
 
-  resources :users 
-  get "users/show"
-
-  get "users/edit"
   
-  
-  get "home/index"
-
-  get "user_sessions/new"
-  resources :user_sessions
- 
-  match 'login' => "user_sessions#new",      :as => :login,:via=> :all
-  match 'logout' => "user_sessions#destroy", :as => :logout,:via=> :all
     
   #get "password_resets/new"
   resources :password_resets do
