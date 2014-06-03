@@ -1,11 +1,3 @@
-=begin
-  categories_controller.rb
-  Description: Controller file for managing the categories
-  Created on: January 11, 2011
-  Last modified on: October 29, 2012
-  Copyright 2013 PIT Solutions Pvt. Ltd. All Rights Reserved.
-=end
-
 class CategoriesController < ApplicationController
   filter_access_to :all
   def index
