@@ -86,7 +86,7 @@ class AttendExamsController < ApplicationController
     @exam_id = params[:exam_id].to_i
     @current_time = Time.now()
     @attempt = params[:attempt].to_i
-    @exam = Exam.find_by_id(@exam_id)
+    @exam = Exam.find(@exam_id)
     
      exam_hrs = @exam.exam_date.hour()
      exam_min = @exam.exam_date.min()
@@ -246,7 +246,7 @@ class AttendExamsController < ApplicationController
        
      @questions = []
      userQuestionset.each do |s|
-       @questions << Question.find_by_id(s)
+       @questions << Question.find(s)
      end
    
       @attempt = params[:attempt].to_i
@@ -301,8 +301,8 @@ class AttendExamsController < ApplicationController
      @currentAttempt = @attempt
      
      #check for manual correction
-     @ce = Categoryexam.find_by_id(params[:categoryexam_id].to_i)
-     @is_manual = Exam.find_by_id(@ce.exam_id)
+     @ce = Categoryexam.find(params[:categoryexam_id].to_i)
+     @is_manual = Exam.find(@ce.exam_id)
      #------------end-----------------
      
     if params[:question_type_id] == '6'
@@ -312,7 +312,7 @@ class AttendExamsController < ApplicationController
          dragDrop
          evaldragDrop
       else
-         @alreadyAnswered = Evaluation.find_by_id(params[:evaluation_id].to_i)
+         @alreadyAnswered = Evaluation.find(params[:evaluation_id].to_i)
          @answer = params[:dropped].to_i
                   
          unless @alreadyAnswered.answer_id == @answer
@@ -331,7 +331,7 @@ class AttendExamsController < ApplicationController
          multipleChoice
          evalMultipleChoice
         else
-         @alreadyAnswered = Evaluation.find_by_id(params[:evaluation_id].to_i)
+         @alreadyAnswered = Evaluation.find(params[:evaluation_id].to_i)
          @answer = params[:answer_id].to_i
          
          unless @alreadyAnswered.answer_id == @answer
@@ -357,13 +357,13 @@ class AttendExamsController < ApplicationController
        else
            @eval = []
            @evaluation.each do|e|
-           @alreadyAnswered = Evaluation.find_by_id(e.to_i)
+           @alreadyAnswered = Evaluation.find(e.to_i)
            @eval << @alreadyAnswered.answer_id
            end
           
            unless @ans == @eval
            @evaluation.each do|e|
-            @alreadyAnswered = Evaluation.find_by_id(e.to_i)
+            @alreadyAnswered = Evaluation.find(e.to_i)
             @alreadyAnswered.destroy
             end
             multipleSelection
@@ -401,13 +401,13 @@ class AttendExamsController < ApplicationController
        else
            @eval = []
            @evaluation.each do|e|
-           @alreadyAnswered = Evaluation.find_by_id(e.to_i)
+           @alreadyAnswered = Evaluation.find(e.to_i)
            @eval << @alreadyAnswered.answer_id
            end
           
            unless @ans == @eval
            @evaluation.each do|e|
-            @alreadyAnswered = Evaluation.find_by_id(e.to_i)
+            @alreadyAnswered = Evaluation.find(e.to_i)
             @alreadyAnswered.destroy
             end
             imageBased
@@ -430,7 +430,7 @@ class AttendExamsController < ApplicationController
 
            unless @evaluation == @current_answer
            @evaluation.each do|e|
-            @alreadyAnswered = Evaluation.find_by_id(e.to_i)
+            @alreadyAnswered = Evaluation.find(e.to_i)
             @alreadyAnswered.destroy
             end
             hrcl_ordering
@@ -452,7 +452,7 @@ class AttendExamsController < ApplicationController
 
            unless @evaluation == @current_answer
             @evaluation.each do|e|
-            @alreadyAnswered = Evaluation.find_by_id(e.to_i)
+            @alreadyAnswered = Evaluation.find(e.to_i)
             @alreadyAnswered.destroy
             end
             matching
@@ -470,8 +470,8 @@ class AttendExamsController < ApplicationController
             descriptive
             evalDescriptive
        else
-           @alreadyAnswered = Evaluation.find_by_id(@evaluation.to_i)          
-           #@alreadyAnswered = Evaluation.find_by_id(@evaluation.to_i)
+           @alreadyAnswered = Evaluation.find(@evaluation.to_i)          
+           #@alreadyAnswered = Evaluation.find(@evaluation.to_i)
            @alreadyAnswered.destroy
            descriptive
            evalDescriptive
@@ -484,7 +484,7 @@ class AttendExamsController < ApplicationController
         @examUser.save
         descriptive
       else
-         @alreadyAnswered = Evaluation.find_by_id(@evaluation.to_i)  
+         @alreadyAnswered = Evaluation.find(@evaluation.to_i)  
          @alreadyAnswered.destroy
          descriptive
       end
@@ -510,7 +510,7 @@ class AttendExamsController < ApplicationController
        @eval = Evaluation.find_by_categoryuser_id_and_categoryexam_id_and_question_id_and_attempt(@categoryUser,@categoryExam,@question_id,@attempt)
        
        @answers = Answer.find_by_question_id_and_is_answer(@question_id,1)
-       @question = Question.find_by_id(@question_id)
+       @question = Question.find(@question_id)
        @answerCollection = []
        @evalCollection = []
        
@@ -542,7 +542,7 @@ class AttendExamsController < ApplicationController
   def evalMultipleChoice       
        @eval = Evaluation.find_by_categoryuser_id_and_categoryexam_id_and_question_id_and_attempt(@categoryUser,@categoryExam,@question_id,@attempt)
        @answers = Answer.find_by_question_id_and_is_answer(@question_id,1)
-       @question = Question.find_by_id(@question_id)
+       @question = Question.find(@question_id)
        @answerCollection = []
        @evalCollection = []
        
@@ -576,7 +576,7 @@ class AttendExamsController < ApplicationController
   def evalMultipleSelection
        @eval = Evaluation.where(["categoryuser_id = ? and categoryexam_id = ? and question_id = ? and attempt = ?",@categoryUser,@categoryExam,@question_id,@attempt])
        @answers = Answer.where(["question_id = ? and is_answer = ?", @question_id,1]) 
-       @question = Question.find_by_id(@question_id)
+       @question = Question.find(@question_id)
        @question_mark = @question.mark
        
        @answerCollection = []
@@ -632,7 +632,7 @@ class AttendExamsController < ApplicationController
        @eval = Evaluation.find_by_categoryuser_id_and_categoryexam_id_and_question_id_and_attempt(@categoryUser,@categoryExam,@question_id,@attempt)
 
        @answers = Answer.where(["question_id = ?", @question_id]) 
-       @question = Question.find_by_id(@question_id)
+       @question = Question.find(@question_id)
        @question_mark = @question.mark
        
        @answerCollection = []
@@ -697,7 +697,7 @@ class AttendExamsController < ApplicationController
       @evalCollection = []
        @eval = Evaluation.where(["categoryuser_id = ? and categoryexam_id = ? and question_id = ? and attempt = ?",@categoryUser,@categoryExam,@question_id,@attempt])
        @answers = Answer.where(["question_id = ?", @question_id])
-       @question = Question.find_by_id(@question_id)
+       @question = Question.find(@question_id)
        @question_mark = @question.mark
        @answerCollection = []
         
@@ -733,8 +733,8 @@ class AttendExamsController < ApplicationController
         evaluation.categoryuser_id = params[:categoryuser_id].to_i
         evaluation.question_id = params[:question_id].to_i
         evaluation.answer_id = a.to_i
-        answer = Answer.find_by_id(a.to_i)
-        question = Question.find_by_id(answer.question_id)
+        answer = Answer.find(a.to_i)
+        question = Question.find(answer.question_id)
         evaluation.answer_name = question.name
         evaluation.categoryexam_id = params[:categoryexam_id].to_i
         evaluation.has_attended = true
@@ -751,7 +751,7 @@ class AttendExamsController < ApplicationController
        ans = Answer.find_by_question_id(sq.id)
        answer_sort_order << ans.id
      end
-     @question = Question.find_by_id(@question_id)
+     @question = Question.find(@question_id)
      @question_mark = @question.mark
      @eval = Evaluation.where(["categoryuser_id = ? and categoryexam_id = ? and question_id = ? and attempt = ?",@categoryUser,@categoryExam,@question_id, @attempt])
        
@@ -795,7 +795,7 @@ class AttendExamsController < ApplicationController
           
       @evalCollection = []
        @eval = Evaluation.where(["categoryuser_id = ? and categoryexam_id = ? and question_id = ? and attempt = ?",@categoryUser,@categoryExam,@question_id,@attempt])
-       @question = Question.find_by_id(params[:question_id].to_i)
+       @question = Question.find(params[:question_id].to_i)
        @question_mark = @question.mark
        
        @eval.each do |eval|
@@ -836,7 +836,7 @@ class AttendExamsController < ApplicationController
        @eval = Evaluation.where(["categoryuser_id = ? and categoryexam_id = ? and question_id = ? and attempt = ?",@categoryUser,@categoryExam,@question_id,@attempt])
        @answers = Answer.where(["question_id = ? and is_answer = ?", @question_id,1]) 
 
-       @question = Question.find_by_id(@question_id)
+       @question = Question.find(@question_id)
        @question_mark = @question.mark
        
        @answerCollection = []

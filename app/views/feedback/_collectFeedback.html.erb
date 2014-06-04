@@ -22,7 +22,7 @@
 
 <td><%= link_to truncate_html(strip_links(question.description)), :controller => "questions", :action=>"viewQuestion", :question=> question.id%><span id="question_share_<%=question.id%>"></span></td>
 <td>
- 	<%qt=QuestionType.find_by_id(question.question_type_id)%>
+ 	<%qt=QuestionType.find(question.question_type_id)%>
  	<%=qt.name%>
 </td>
 

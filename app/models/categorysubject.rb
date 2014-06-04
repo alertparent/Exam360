@@ -25,12 +25,12 @@ class Categorysubject < ActiveRecord::Base
       
      @organization_id = Setting.first.organization_id
 
-     p = Category.find_by_id_and_organization_id(h.category_id,@organization_id)
+     p = Category.find_and_organization_id(h.category_id,@organization_id)
     @subject = Subject.find(h.subject_id)
    unless p == nil
    if @organization_id == 1
-     course = Course.find_by_id_and_organization_id(p.course_id,@organization_id)
-     section = Section.find_by_id_and_organization_id(p.section_id,@organization_id)
+     course = Course.find_and_organization_id(p.course_id,@organization_id)
+     section = Section.find_and_organization_id(p.section_id,@organization_id)
      
      @group = course.name[0..40] + " << " + section.name[0..25] + " Section"
    end
@@ -38,10 +38,10 @@ class Categorysubject < ActiveRecord::Base
   
   unless p == nil
    if @organization_id == 2
-     course = Course.find_by_id_and_organization_id(p.course_id,@organization_id)
-     academicYear = AcademicYear.find_by_id_and_organization_id(p.academic_year_id,@organization_id)
-     department = Department.find_by_id_and_organization_id(p.department_id,@organization_id)
-     semester = Semester.find_by_id_and_organization_id(p.semester_id,@organization_id)
+     course = Course.find_and_organization_id(p.course_id,@organization_id)
+     academicYear = AcademicYear.find_and_organization_id(p.academic_year_id,@organization_id)
+     department = Department.find_and_organization_id(p.department_id,@organization_id)
+     semester = Semester.find_and_organization_id(p.semester_id,@organization_id)
      
      @group = course.name[0..20] + " << " + department.name[0..30] + " << " + academicYear.name[0..8]+ " year " + " << " + semester.name[0..8]+ " Semester "
    end
@@ -49,7 +49,7 @@ class Categorysubject < ActiveRecord::Base
   
   unless p == nil
     if @organization_id == 3
-     department = Department.find_by_id_and_organization_id(p.department_id,@organization_id)
+     department = Department.find_and_organization_id(p.department_id,@organization_id)
      
      @group =  department.name[0..50]
     end
@@ -57,7 +57,7 @@ class Categorysubject < ActiveRecord::Base
   
   unless p == nil
   if @organization_id == 4
-     department = Department.find_by_id_and_organization_id(p.department_id,@organization_id)
+     department = Department.find_and_organization_id(p.department_id,@organization_id)
      
      @group =  department.name[0..50]
   end

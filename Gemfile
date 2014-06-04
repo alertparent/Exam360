@@ -37,11 +37,10 @@ gem "truncate_html"
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
  # gem 'ruby-debug'
- gem 'debugger'
+ gem 'debugger', group: :development
 # gem 'ruby-debug19'
 
 
-# gem 'protected_attributes'
 gem 'rails-observers'
 gem 'actionpack-page_caching'
 gem 'actionpack-action_caching'

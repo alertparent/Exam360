@@ -1,6 +1,6 @@
 
 <div style="padding:5px 5px">
-	<% qustionType = QuestionType.find_by_id(@question.question_type_id)%>
+	<% qustionType = QuestionType.find(@question.question_type_id)%>
 	<b><%=t("question_types.qt#{qustionType.id}")%></b><br>
 	
 	<div style="background:#efefef; padding:5px 5px; margin-top: 5px;">

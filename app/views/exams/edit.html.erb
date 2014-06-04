@@ -101,7 +101,7 @@
 				
 			</tr>	
 		   <%@examQuestions.each do|question|%>
-			  	<% qustionType = QuestionType.find_by_id(question.question_type_id)%>
+			  	<% qustionType = QuestionType.find(question.question_type_id)%>
 			  <tr class="updateAltrRow <%= cycle("odd", "even") %>">
                 <td ><%= raw(question.description) %> (<%=t("question_types.qt#{qustionType.id}")%>)</td>
 				<td><%= question.mark %></td>
@@ -131,7 +131,7 @@
 			    <th><%=t('general.delete')%></th>
 			    </tr>
 			 <%@examUsers.each do|user|%>
-			  	<% examineeId = User.find_by_id(user.id)%>
+			  	<% examineeId = User.find(user.id)%>
 			  <tr class="updateAltrRow <%= cycle("odd", "even") %>">
                 <td ><%= "#{user.name}" %> ( <%="#{user.year}"%> ) </td>
 				<td ></td>

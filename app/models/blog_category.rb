@@ -7,19 +7,19 @@ class BlogCategory < ActiveRecord::Base
   validates_uniqueness_of :name
   
   def getSubcategories(category)
-    @category = BlogCategory.find_by_id(category.id)
+    @category = BlogCategory.find(category.id)
     @subcategories = @category.subcategories
     return @subcategories
   end
   
   def getArticles(category)
-    @category = BlogCategory.find_by_id(category.id)
+    @category = BlogCategory.find(category.id)
     @articles = @category.articles
     return @articles   
   end
   
   def getSubcategoryArticle(subcategory)
-    @subcategory = Subcategory.find_by_id(subcategory.id)
+    @subcategory = Subcategory.find(subcategory.id)
     @articles = @subcategory.articles    
     return @articles
   end

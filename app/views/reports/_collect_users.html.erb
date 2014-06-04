@@ -10,7 +10,7 @@
 
 <%@category_user.each do|examinee|%>
 <tr class="updateAltrRow <%= cycle("odd", "even") %>">
-<% user = User.find_by_id(examinee.userid)%>
+<% user = User.find(examinee.userid)%>
 
 <%if user.is_temp_examinee == 1%>
 <td><%=user.login%></td>

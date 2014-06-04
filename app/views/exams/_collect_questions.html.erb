@@ -15,7 +15,7 @@
 <tr class="updateAltrRow <%= cycle("odd", "even") %>">
 <td><%=truncate_html(strip_links(question.description))%></td>
 <td>
- 	<%qt=QuestionType.find_by_id(question.question_type_id)%>
+ 	<%qt=QuestionType.find(question.question_type_id)%>
  	<%=qt.name%>
 </td>
 <td>

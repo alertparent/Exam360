@@ -30,7 +30,7 @@ class FeedbackController < ApplicationController
      @all_published_questions = params[:question]
   
      @all_published_questions.each do|publish|
-        @question = Question.find_by_id(publish.to_i)
+        @question = Question.find(publish.to_i)
         @question.update_attributes(:feedback => 1)
       end
        flash[:success] = t('flash_success.ques_published')
@@ -43,7 +43,7 @@ class FeedbackController < ApplicationController
  def unassign
     all_published_questions = params[:question]
     publish = all_published_questions.split("_").last
-    @question = Question.find_by_id(publish.to_i)
+    @question = Question.find(publish.to_i)
     if @question.feedback == 1
        @question.update_attributes(:feedback => 0)
         render :json => {:text=>true}
@@ -119,7 +119,7 @@ class FeedbackController < ApplicationController
  end
  
  def viewfeedbackResponse
-   @question = Question.find_by_id(params[:question_id].to_i)
+   @question = Question.find(params[:question_id].to_i)
    @subQuestions = Question.where(["parent_id = ?",@question.id])
    answers = Answer.find_all_by_question_id(@question.id)
  end

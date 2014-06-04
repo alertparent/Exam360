@@ -86,8 +86,8 @@ class QuestionsController < ApplicationController
     unless params[:subject] == nil and params[:question_type] == nil
      unless params[:subject].to_i == 0
       @category_id = params[:subject]
-      @categorySubject = Categorysubject.find_by_id(@category_id.to_i)
-      @subject = Subject.find_by_id(@categorySubject.subject_id)
+      @categorySubject = Categorysubject.find(@category_id.to_i)
+      @subject = Subject.find(@categorySubject.subject_id)
        @users = @categorySubject.users
       if @users.length >= 1
         @users.each do |user|
@@ -348,7 +348,7 @@ class QuestionsController < ApplicationController
     
   
   def edit
-    @questionUser = Question.find_by_id(params[:id])
+    @questionUser = Question.find(params[:id])
     if current_user.role_id == Admin or current_user.role_id == Examiner or @questionUser.user_id == current_user.id    
     @question_type_id = params[:qt_id]
     if @question_type_id == '10'
@@ -411,13 +411,13 @@ class QuestionsController < ApplicationController
 
         if is_answers
             seen_ids.each do |id|
-            answer = Answer.find_by_id(id)
+            answer = Answer.find(id)
             answer.is_answer = is_answers.include?(id)
             answer.save
           end
         else
           seen_ids.each do |id|
-            answer = Answer.find_by_id(id)
+            answer = Answer.find(id)
             answer.is_answer = 0
             answer.save
             end
@@ -469,13 +469,13 @@ class QuestionsController < ApplicationController
 
         if is_answers
             seen_ids.each do |id|
-            answer = Answer.find_by_id(id)
+            answer = Answer.find(id)
             answer.is_answer = is_answers.include?(id)
             answer.save
           end
         else
           seen_ids.each do |id|
-            answer = Answer.find_by_id(id)
+            answer = Answer.find(id)
             answer.is_answer = 0
             answer.save
             end
@@ -537,13 +537,13 @@ class QuestionsController < ApplicationController
        seen_ids = params[:seen].collect {|id| id.to_i} if params[:seen]
         if is_answers
             seen_ids.each do |id|
-            answer = Answer.find_by_id(id)
+            answer = Answer.find(id)
             answer.is_answer = is_answers.include?(id)
             answer.save
           end
         else
           seen_ids.each do |id|
-            answer = Answer.find_by_id(id)
+            answer = Answer.find(id)
             answer.is_answer = 0
             answer.save
             end
@@ -763,7 +763,7 @@ class QuestionsController < ApplicationController
 def publish_unpublish
    @all_published_questions = params[:question]
    @all_published_questions.each do|publish|
-      @question = Question.find_by_id(publish.to_i)
+      @question = Question.find(publish.to_i)
       @question.update_attributes(:is_published => 1)
     end
      flash[:success] = t('flash_success.ques_published')
@@ -773,7 +773,7 @@ def publish_unpublish
  def unpublish
    all_published_questions = params[:question]
    publish = all_published_questions.split("_").last
-      @question = Question.find_by_id(publish.to_i)
+      @question = Question.find(publish.to_i)
       @question.update_attributes(:is_published => 0)
     render :text => true
  end
@@ -783,8 +783,8 @@ def publish_unpublish
  def sharewithCategory
    @shared_question = params[:share]
    @shared_question = @shared_question.split("_").last
-   @quesUser = Question.find_by_id(@shared_question) 
-   @userId = User.find_by_id(@quesUser.user_id) 
+   @quesUser = Question.find(@shared_question) 
+   @userId = User.find(@quesUser.user_id) 
    @users=User.where(["(role_id = ? and id != ? and id != ?)",Qsetter,current_user.id,@userId]).order("created_at desc")
    render :layout => false
  end
@@ -793,8 +793,8 @@ def publish_unpublish
     if params[:user_id].to_i >= 1
       user_id= params[:user_id].to_i
       question_id = params[:question_id].to_i
-      question = Question.find_by_id(question_id)
-      user = User.find_by_id(user_id)
+      question = Question.find(question_id)
+      user = User.find(user_id)
        question.users << user
        question.save
        flash[:success] = t('flash_success.ques_shared')
@@ -809,7 +809,7 @@ def publish_unpublish
   end
 
   def viewQuestion
-   @question = Question.find_by_id(params[:question].to_i)
+   @question = Question.find(params[:question].to_i)
   end
   
   def format_desc string

@@ -30,7 +30,7 @@ class SettingsController < ApplicationController
     @Locale_type = [[t('locale.english'),"en"], [t('locale.german'),"de"], [t('locale.arabic'),"ar"], [t('locale.chinese'),"zh"]]
     @setting = Setting.first
     unless @setting.organization_id == nil
-    @organizationName = Organization.find_by_id(@setting.organization_id).id
+    @organizationName = Organization.find(@setting.organization_id).id
     @dateFormat = @setting.datetime_format
     @locale = @setting.locale
     @approveExaminee = @setting.examineeApprove

@@ -27,11 +27,11 @@ class ClientinfoController < ApplicationController
       end
     end
       def edit
-        @clientinfo = Clientinfo.find_by_id(params[:id])
+        @clientinfo = Clientinfo.find(params[:id])
       end
       
         def update
-          @clientinfo = Clientinfo.find_by_id(params[:id])
+          @clientinfo = Clientinfo.find(params[:id])
           if @clientinfo.update_attributes(params[:clientinfo])
            flash[:success] = t('flash_success.client_updated')
            redirect_to :action=>:index, :controller=>:clientinfo

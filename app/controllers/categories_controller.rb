@@ -58,7 +58,7 @@ class CategoriesController < ApplicationController
   end
   
   def delete_category
-      category = Category.find_by_id(params[:category_id].to_i)
+      category = Category.find(params[:category_id].to_i)
       categorexam = Categoryexam.where(["category_id = ?", params[:category_id].to_i])
       categoruser = Categoryuser.where(["category_id = ?", params[:category_id].to_i])
       categorsubject = Categorysubject.where(["category_id = ?", params[:category_id].to_i])

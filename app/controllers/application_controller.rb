@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
     def load_default_data
       @app_setting = Setting.first
       @organization_id = Setting.first.organization_id
-      @category_types = CategoryType.find_by(:organization_id=>@organization_id.to_i) if @organization_id
+      @category_types = CategoryType.where(:organization_id=>@organization_id.to_i) if @organization_id
     end
     
       protected

@@ -1,18 +1,10 @@
-=begin
-  article_controller.rb
-  Description: Controller file for managing the articles in Blog feature.
-  Created on: April 09, 2012
-  Last modified on: October 10, 2012
-  Copyright 2013 PIT Solutions Pvt. Ltd. All Rights Reserved.
-=end
-
 class ArticleController < ApplicationController
   #filter_access_to :all, :except => :index
   layout 'blog'
   before_filter :require_user, :only=>[:new]
   #before_filter :require_no_user,:except=>:index
   def index
-    @article = Article.find_by_title(params[:articles])
+    @article = Article.find_by(:title=>params[:articles])
     @comment=@article.comments.new
     @page_title = @article.title
     respond_to do |format|
@@ -22,7 +14,7 @@ class ArticleController < ApplicationController
   end
   
   def show
-    @article = Article.find_by_id(params[:id])
+    @article = Article.find(params[:id])
     @comment=@article.comments.new
     @page_title = @article.title
     respond_to do |format|
@@ -52,7 +44,7 @@ class ArticleController < ApplicationController
 
   def comment
     @article_id = params[:comments][:article_id]
-    @article = Article.find_by_id(@article_id.to_i)
+    @article = Article.find(@article_id.to_i)
     @comment = @article.comments.new(params[:comment]) 
     if @comment.save
       @comment = @article.comments.new
@@ -62,7 +54,7 @@ class ArticleController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-    @category = BlogCategory.find_by_id(@article.blog_category_id)
+    @category = BlogCategory.find(@article.blog_category_id)
     unless @category==nil
     @subcategories = @category.subcategories
   else
@@ -106,7 +98,7 @@ class ArticleController < ApplicationController
      @blogCategory_id = params[:category_id]
    
     unless @blogCategory_id == nil or params[:category_id].to_i == 0
-     @blogCategory = BlogCategory.find_by_id(params[:category_id].to_i)
+     @blogCategory = BlogCategory.find(params[:category_id].to_i)
      @subcategories = @blogCategory.subcategories  
 
      else
@@ -150,10 +142,10 @@ class ArticleController < ApplicationController
   end
   
   def delete_comment
-    @comment = Comment.find_by_id(params[:id].to_i)
+    @comment = Comment.find(params[:id].to_i)
     @comment.destroy
     @article_id = params[:article_id]
-    @article = Article.find_by_id(@article_id.to_i)
+    @article = Article.find(@article_id.to_i)
     
     #redirect_to :back
   end

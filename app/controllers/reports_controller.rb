@@ -403,14 +403,14 @@ class ReportsController < ApplicationController
                  @attempt = params[:attempt].to_i
                  @status = (params[:status] == "p" ? "Pass" : "Fail")
                  @percent_acquired = params[:percent].to_f.round(2)
-                 @findCategoryuser = Categoryuser.find_by_id(@categoryuserId)
-                 @findCategoryexam = Categoryexam.find_by_id(@categoryexamId)           
-                 @findCategory = Category.find_by_id(@findCategoryexam.category_id)                      
-                 @findCourse = Course.find_by_id(@findCategory.course_id)
-                 @findSection= Section.find_by_id(@findCategory.section_id)           
-                 @findUser = User.find_by_id(@findCategoryuser.user_id)
-                 @findExam = Exam.find_by_id(@findCategoryexam.exam_id)           
-                 @findExamtype = Examtype.find_by_id(@findCategoryexam.examtype_id)       
+                 @findCategoryuser = Categoryuser.find(@categoryuserId)
+                 @findCategoryexam = Categoryexam.find(@categoryexamId)           
+                 @findCategory = Category.find(@findCategoryexam.category_id)                      
+                 @findCourse = Course.find(@findCategory.course_id)
+                 @findSection= Section.find(@findCategory.section_id)           
+                 @findUser = User.find(@findCategoryuser.user_id)
+                 @findExam = Exam.find(@findCategoryexam.exam_id)           
+                 @findExamtype = Examtype.find(@findCategoryexam.examtype_id)       
                  @evaluationContent = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ?", @categoryexamId,@categoryuserId,@attempt]).map{ |i| i.question_id }.uniq
                  @answerd = evaluationContent = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ?", @categoryexamId,@categoryuserId,@attempt])
                  @login_count = 1
@@ -425,16 +425,16 @@ class ReportsController < ApplicationController
                  @attempt = params[:attempt].to_i
                  @status = (params[:status] == "p" ? "Pass" : "Fail")
                  @percent_acquired = params[:percent].to_f.round(2) 
-                 @findCategoryuser = Categoryuser.find_by_id(@categoryuserId)
-                 @findCategoryexam = Categoryexam.find_by_id(@categoryexamId)         
-                 @findCategory = Category.find_by_id(@findCategoryexam.category_id)
-                 @findDepartment = Department.find_by_id(@findCategory.department_id)
-                 @findyear = AcademicYear.find_by_id(@findCategory.academic_year_id)
-                 @findCourse = Course.find_by_id(@findCategory.course_id)
-                 @findSemester= Semester.find_by_id(@findCategory.semester_id)        
-                 @findUser = User.find_by_id(@findCategoryuser.user_id)
-                 @findExam = Exam.find_by_id(@findCategoryexam.exam_id)         
-                 @findExamtype = Examtype.find_by_id(@findCategoryexam.examtype_id) 
+                 @findCategoryuser = Categoryuser.find(@categoryuserId)
+                 @findCategoryexam = Categoryexam.find(@categoryexamId)         
+                 @findCategory = Category.find(@findCategoryexam.category_id)
+                 @findDepartment = Department.find(@findCategory.department_id)
+                 @findyear = AcademicYear.find(@findCategory.academic_year_id)
+                 @findCourse = Course.find(@findCategory.course_id)
+                 @findSemester= Semester.find(@findCategory.semester_id)        
+                 @findUser = User.find(@findCategoryuser.user_id)
+                 @findExam = Exam.find(@findCategoryexam.exam_id)         
+                 @findExamtype = Examtype.find(@findCategoryexam.examtype_id) 
                  #evaluationContent = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ?", categoryexamId,categoryuserId,attempt])#.select('DISTINCT question_id')
                  @evaluationContent = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ?", @categoryexamId,@categoryuserId,@attempt]).map{ |i| i.question_id }.uniq
                  @answerd = evaluationContent = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ?", @categoryexamId,@categoryuserId,@attempt])
@@ -451,13 +451,13 @@ class ReportsController < ApplicationController
                  @attempt = params[:attempt].to_i
                  @status = (params[:status] == "p" ? "Pass" : "Fail")
                  @percent_acquired = params[:percent].to_f.round(2)
-                 @findCategoryuser = Categoryuser.find_by_id(@categoryuserId)
-                 @findCategoryexam = Categoryexam.find_by_id(@categoryexamId)           
-                 @findCategory = Category.find_by_id(@findCategoryexam.category_id)       
-                 @findDepartment = Department.find_by_id(@findCategory.department_id)           
-                 @findUser = User.find_by_id(@findCategoryuser.user_id)
-                 @findExam = Exam.find_by_id(@findCategoryexam.exam_id)           
-                 @findExamtype = Examtype.find_by_id(@findCategoryexam.examtype_id)           
+                 @findCategoryuser = Categoryuser.find(@categoryuserId)
+                 @findCategoryexam = Categoryexam.find(@categoryexamId)           
+                 @findCategory = Category.find(@findCategoryexam.category_id)       
+                 @findDepartment = Department.find(@findCategory.department_id)           
+                 @findUser = User.find(@findCategoryuser.user_id)
+                 @findExam = Exam.find(@findCategoryexam.exam_id)           
+                 @findExamtype = Examtype.find(@findCategoryexam.examtype_id)           
                  #evaluationContent = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ?", categoryexamId,categoryuserId,attempt])#.select('DISTINCT question_id')
                  @evaluationContent = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ?", @categoryexamId,@categoryuserId,@attempt]).map{ |i| i.question_id }.uniq
                  @answerd = evaluationContent = Evaluation.where(["categoryexam_id = ? and categoryuser_id = ? and attempt = ?", @categoryexamId,@categoryuserId,@attempt])
@@ -2114,7 +2114,7 @@ class ReportsController < ApplicationController
       
     @c = Categoryexam.where(['category_id = ? and currentyear = ? and examtype_id = ?',categoryId,year,examType])
     @c.each do|c|
-      exam = Exam.find_by_id(c.exam_id)
+      exam = Exam.find(c.exam_id)
       @examNames << exam
     end
     

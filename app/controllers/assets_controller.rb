@@ -78,10 +78,10 @@ end
   
 def get  
  #first find the asset within own assets  
- asset = current_user.assets.find_by_id(params[:id])  
+ asset = current_user.assets.find(params[:id])  
   
  #if not found in own assets, check if the current_user has share access to the parent folder of the File  
- asset ||= Asset.find(params[:id]) #if current_user.has_share_access?(Asset.find_by_id(params[:id]).folder)  
+ asset ||= Asset.find(params[:id]) #if current_user.has_share_access?(Asset.find(params[:id]).folder)  
   
  if asset  
    #Parse the URL for special characters first before downloading  
@@ -146,7 +146,7 @@ end
   end
   
   def lock
-    @asset = Asset.find_by_id(params[:asset_id])
+    @asset = Asset.find(params[:asset_id])
     unless @asset == nil
       @asset.lock = 1
       @asset.save
@@ -157,7 +157,7 @@ end
   end
   
   def unlock
-    @asset = Asset.find_by_id(params[:asset_id])
+    @asset = Asset.find(params[:asset_id])
     unless @asset == nil
       @asset.lock = 0
       @asset.save

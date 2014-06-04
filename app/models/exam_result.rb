@@ -129,10 +129,10 @@ class ExamResult < ActiveRecord::Base
   def sqlGather(p)
     @organization_id = Setting.first.organization_id
     if @organization_id == 2
-     course = Course.find_by_id_and_organization_id(p.courseId,@organization_id)
-     academicYear = AcademicYear.find_by_id_and_organization_id(p.yearId,@organization_id)
-     department = Department.find_by_id_and_organization_id(p.departmentId,@organization_id)
-     semester = Semester.find_by_id_and_organization_id(p.semesterId,@organization_id)
+     course = Course.find_and_organization_id(p.courseId,@organization_id)
+     academicYear = AcademicYear.find_and_organization_id(p.yearId,@organization_id)
+     department = Department.find_and_organization_id(p.departmentId,@organization_id)
+     semester = Semester.find_and_organization_id(p.semesterId,@organization_id)
      
      @group = course.name + " << " + academicYear.name + " << " + department.name + " << " + semester.name
    end

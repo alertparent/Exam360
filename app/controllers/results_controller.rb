@@ -11,7 +11,7 @@ class ResultsController < ApplicationController
   
   def index
     @organization_id = Setting.first.organization_id
-    @currentUser = User.find_by_id(current_user.id)
+    @currentUser = User.find(current_user.id)
     @categories = @currentUser.categories
     @categoryId = params[:categoryId].to_i
     @examType = params[:et_name].to_i

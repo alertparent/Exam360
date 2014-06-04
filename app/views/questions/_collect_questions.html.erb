@@ -20,16 +20,16 @@
 
 <td id="reset_share_<%=question.id%>" class="firstblock"><%= link_to truncate_html(strip_links(question.description)), :action=>"viewQuestion", :question=> question.id%><span id="question_share_<%=question.id%>"></span></td>
 <td>
- 	<%qt=QuestionType.find_by_id(question.question_type_id)%>
+ 	<%qt=QuestionType.find(question.question_type_id)%>
  	<%unless qt == nil%>
 	<%=t("question_types.qt#{qt.id}")%>
 	<%end%>
 </td>
 <td class="thirdblock">
 	<%if question.categorysubject_id != 0%>
-         <% catsub = Categorysubject.find_by_id(question.categorysubject_id)%>
+         <% catsub = Categorysubject.find(question.categorysubject_id)%>
 	     <% unless catsub == nil%>
-		 <% sub = Subject.find_by_id(catsub.subject_id)%>
+		 <% sub = Subject.find(catsub.subject_id)%>
 	     <%=sub.name%>
 		 <%end%>
 	<%else%>

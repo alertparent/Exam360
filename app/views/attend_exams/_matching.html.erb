@@ -58,7 +58,7 @@
 						   <li style="padding-left: 0px; padding-top: 0px; margin:0px 0 8px 0; font-size: 13px; float:left; width:90%;">
 						    <div class="tblRepeaterRow" style="margin-bottom:0px;">
 						    	<%#=a.id%>
-						    	<%answer = Answer.find_by_id(a.answer_id)%>
+						    	<%answer = Answer.find(a.answer_id)%>
 						    	<span style="margin-left:0px;" title="<%=answer.match_answer%>"><%= label_tag :answer,truncate(answer.match_answer, :length=>30), :style=>"width:200px; height:19px; border:#d1d1d1 1px solid; display: block; float:left; padding-left: 2px;", :disabled => true, :id=>a.id%></span>
 							    <%= hidden_field_tag "answer_id[]",a.answer_id %>
 								<%= hidden_field_tag "evaluation_id[]", a.id%>

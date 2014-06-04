@@ -11,12 +11,12 @@
 
 <%@category_exam.each do|catexam|%>
 <tr class="updateAltrRow <%= cycle("odd", "even") %>">
-<% exam = Exam.find_by_id(catexam.exam_id)%>
+<% exam = Exam.find(catexam.exam_id)%>
 <td><%=exam.name%></td>
 
 
 <td>
-<%category = Category.find_by_id(catexam.category_id)%>
+<%category = Category.find(catexam.category_id)%>
 <%semesterId = category.semester_id%>
 <%= link_to t('general.view'), :action =>"viewexamReport", :exam_id=>exam.id,:category_id=>@category_id, :examType=>@examtype, :currentyear=>@academicYear %>
 

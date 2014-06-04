@@ -7,7 +7,7 @@ class Subcategory < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [:blog_category_id], :message=>" already exists!"
 
   def getSubcategoryArticle(subcategory)
-    @subcategory = Subcategory.find_by_id(subcategory.id)
+    @subcategory = Subcategory.find(subcategory.id)
     @articles = @subcategory.articles    
     return @articles
   end

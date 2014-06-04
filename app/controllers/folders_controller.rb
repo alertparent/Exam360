@@ -116,12 +116,12 @@ end
  
 def browse  
   #first find the current folder within own folders  
-  @current_folder = current_user.folders.find_by_id(params[:folder_id])    
+  @current_folder = current_user.folders.find(params[:folder_id])    
   @is_this_folder_being_shared = false if @current_folder #just an instance variable to help hiding buttons on View  
     
   #if not found in own folders, find it in being_shared_folders  
   if @current_folder.nil?  
-    folder = Folder.find_by_id(params[:folder_id])  
+    folder = Folder.find(params[:folder_id])  
       
     @current_folder ||= folder if current_user.has_share_access?(folder)  
     @is_this_folder_being_shared = true if @current_folder #just an instance variable to help hiding buttons on View  
@@ -177,9 +177,9 @@ end
   
   def unshareFolder
    @shared_to_users = SharedFolder.where("folder_id = ? AND shared_user_id IS NOT NULL", params[:unshare])
-   @shared_folder = Folder.find_by_id(params[:unshare])
+   @shared_folder = Folder.find(params[:unshare])
    if @shared_to_users.nil?
-      @shared_user = User.find_by_id(@shared_to_users.first.user_id)
+      @shared_user = User.find(@shared_to_users.first.user_id)
    end 
    render :layout => false
  end

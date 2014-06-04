@@ -39,9 +39,9 @@
 			<%end%>            
 	            
 			<%evaluationContent.each do|e|%>            
-				<%@question = Question.find_by_id(e.question_id)%>
+				<%@question = Question.find(e.question_id)%>
 				<%@descriptive_answer = e.descriptive_answer unless e.descriptive_answer == nil%> 
-				<%answer = Answer.find_by_id(e.answer_id)%>            
+				<%answer = Answer.find(e.answer_id)%>            
 				<%if @question.question_type_id == 3 or @question.question_type_id == 10%>            
 					<%@ans << e.answer_name unless e.answer_name == nil%>              
 				<%elsif @question.question_type_id == 11%>            

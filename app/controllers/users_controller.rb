@@ -36,7 +36,7 @@ class UsersController < ApplicationController
         @subjects = params[:category].collect {|id| id.to_i} if params[:category]
         if @subjects
           @subjects.each do|subject|
-            @subject = Categorysubject.find_by_id(subject)
+            @subject = Categorysubject.find(subject)
             @user.categorysubjects << @subject       
           end
         end    
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
   def edit
     @subjectUser = Subjectuser.where(['user_id = ?', params[:id].to_i])
     if current_user.id == params[:id].to_i or current_user.role_id == Admin and current_user.is_temp_examinee != 1
-      @user = User.find_by_id_and_confirmed_and_is_approved(params[:id],true,1)
+      @user = User.find_and_confirmed_and_is_approved(params[:id],true,1)
       unless @user == nil
         @value = @user.role_id
       else
@@ -102,7 +102,7 @@ class UsersController < ApplicationController
 
  def update
     @user_id = params[:user_id]
-    @user = User.find_by_id(params[:user_id].to_i)
+    @user = User.find(params[:user_id].to_i)
     @create_id = params[:user][:role_id]
     
     if @create_id == Qsetter.to_s
@@ -111,7 +111,7 @@ class UsersController < ApplicationController
       @subjects.each do|subject|
         subjectUser = Subjectuser.find_by_user_id_and_categorysubject_id(params[:user_id].to_i,subject)
         if subjectUser == nil
-        @subject = Categorysubject.find_by_id(subject)
+        @subject = Categorysubject.find(subject)
         @user.categorysubjects << @subject
         @user.save
         end
@@ -174,11 +174,11 @@ class UsersController < ApplicationController
   end
 
   def createGroup
-    @getCategory = Category.find_by_id(params[:category][:id].to_i)   
+    @getCategory = Category.find(params[:category][:id].to_i)   
     @examinees = params[:examinee]
       @examinees.each do|examinee|
         @categoryuser = Categoryuser.new
-        @getExaminee = User.find_by_id(examinee.to_i)  
+        @getExaminee = User.find(examinee.to_i)  
         @categoryuser.category_id = @getCategory.id
         @categoryuser.user_id = @getExaminee.id
         @categoryuser.currentyear = params[:academicYear]     
@@ -222,7 +222,7 @@ class UsersController < ApplicationController
   
   def activate
    user = params[:user_id]
-      @user = User.find_by_id(user.to_i)
+      @user = User.find(user.to_i)
       @user.update_attributes(:active => true)
       render :text => true
   end
@@ -230,7 +230,7 @@ class UsersController < ApplicationController
  def inactivate
    user = params[:user_id]
 
-      @user = User.find_by_id(user.to_i)
+      @user = User.find(user.to_i)
       @user.update_attributes(:active => false)
       render :text => true
  end

@@ -27,9 +27,9 @@ class Question < ActiveRecord::Base
   
   def collect_subject(id)
     if id != nil
-    @cat = Categorysubject.find_by_id(id)
+    @cat = Categorysubject.find(id)
     @cat = @cat.subject_id
-    @subject = Subject.find_by_id(@cat)
+    @subject = Subject.find(@cat)
     @subjectName = @subject.name
     return @subjectName
     end

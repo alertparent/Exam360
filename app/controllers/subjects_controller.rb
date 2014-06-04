@@ -43,8 +43,8 @@ class SubjectsController < ApplicationController
   end
 
   def cs
-    @subject = Subject.find_by_id(params[:subject].to_i)
-    @category = Category.find_by_id(params[:id].to_i)
+    @subject = Subject.find(params[:subject].to_i)
+    @category = Category.find(params[:id].to_i)
      @subject.categories << @category
        
      @subject.save

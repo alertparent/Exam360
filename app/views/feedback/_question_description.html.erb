@@ -1,6 +1,6 @@
 <div class="question_desc_feedback">
 	<table>
-  		<% qustionType = QuestionType.find_by_id(@question.question_type_id)%>
+  		<% qustionType = QuestionType.find(@question.question_type_id)%>
 	  	
 	  	<tr>
 			<td class="container_desc">

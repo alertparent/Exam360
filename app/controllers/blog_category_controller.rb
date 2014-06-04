@@ -78,13 +78,13 @@ class BlogCategoryController < ApplicationController
   end
   
   def subcategory_article
-    @subcategory = Subcategory.find_by_id(params[:subcategory_id].to_i)
+    @subcategory = Subcategory.find(params[:subcategory_id].to_i)
     @articles = @subcategory.articles
     @page_title = @subcategory.name
   end
   
   def categoryArticle
-    @category = BlogCategory.find_by_id(params[:category].to_i)
+    @category = BlogCategory.find(params[:category].to_i)
     @articles = @category.articles
   end
   

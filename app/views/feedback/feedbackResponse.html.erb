@@ -1,6 +1,6 @@
 <% @collect = []%>
 <%@feedbackResponses.each do|fr|%>
-<%question = Question.find_by_id(fr)%>
+<%question = Question.find(fr)%>
 <%unless question.description == nil%>
 <% @collect << fr%>
 <%end%>
@@ -19,7 +19,7 @@
 
 <% @collect.each do|responseQuestion|%>
 <tr class="updateAltrRow <%= cycle("odd", "even") %>">
-<%question = Question.find_by_id(responseQuestion)%>
+<%question = Question.find(responseQuestion)%>
 <%unless question.description == nil%>
 <td><%= truncate_html(strip_links(question.description)) %></td>
 <td>

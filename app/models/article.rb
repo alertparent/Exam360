@@ -34,12 +34,12 @@ class Article < ActiveRecord::Base
   end
   
   def username(user_id)
-    @user = User.find_by_id(user_id)
+    @user = User.find(user_id)
     return @user.name
   end
   
   def has_comment(article)
-    @article = Article.find_by_id(article.id)
+    @article = Article.find(article.id)
     if @article.enable_comment == true
       return true
     else

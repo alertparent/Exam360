@@ -36,7 +36,7 @@ class ExamsController < ApplicationController
   end
   
   def edit
-     @exam = Exam.find_by_id(params[:id])
+     @exam = Exam.find(params[:id])
      
      @examQuestions = Examquestion.where(["exam_id = ?", params[:id].to_i])
      @fetchQuestions = 0
@@ -107,10 +107,10 @@ class ExamsController < ApplicationController
   
   def deleteExamQuestion
     @examQuestion = Examquestion.where(["exam_id = ? and question_id = ?", params[:exam_id],params[:question_id]]) 
-    @examQuestion = Examquestion.find_by_id(@examQuestion.first.id) 
+    @examQuestion = Examquestion.find(@examQuestion.first.id) 
     @examQuestion.destroy
     
-    @exam = Exam.find_by_id(params[:exam_id].to_i)
+    @exam = Exam.find(params[:exam_id].to_i)
     @exam.start_exam = 0
     @exam.save
     @examQuestions = Examquestion.where(["exam_id = ?", params[:exam_id]])
@@ -141,7 +141,7 @@ class ExamsController < ApplicationController
   
   def getMark
     examId = params[:exam_id]
-    @exam = Exam.find_by_id(examId.to_i)
+    @exam = Exam.find(examId.to_i)
     
     @totalMark = @exam.total_mark
     @examQuestions = Examquestion.where(["exam_id = ?", examId.to_i])
@@ -211,7 +211,7 @@ class ExamsController < ApplicationController
 
     @c = Categoryexam.where(['category_id = ? and currentyear = ? and examtype_id = ?',@categoryId,params[:academicYear].to_i, params[:et_name].to_i])
     @c.each do|c|
-      exam = Exam.find_by_id(c.exam_id)
+      exam = Exam.find(c.exam_id)
       @examNames << exam
     end
      
@@ -244,14 +244,14 @@ class ExamsController < ApplicationController
   
   def assignQustions
     
-    @fetchExam = Exam.find_by_id(params[:examName].to_i)
+    @fetchExam = Exam.find(params[:examName].to_i)
     @examMark = @fetchExam.total_mark
 
     @examId = params[:examName] 
     fetchMark
     
     unless params[:question] == nil
-      @examName = Exam.find_by_id(params[:examName])
+      @examName = Exam.find(params[:examName])
       questions = params[:question]
       
        questions.each do|question|
@@ -266,7 +266,7 @@ class ExamsController < ApplicationController
            flash[:notice] = "#{t('flash_notice.ques_mark_exceeding')} #{@markDifference.to_i}."
          else
              questions.each do|question|
-             getQuestion = Question.find_by_id(question.to_i)
+             getQuestion = Question.find(question.to_i)
              @examName.questions << getQuestion
              @examName.save
              end 
@@ -296,7 +296,7 @@ class ExamsController < ApplicationController
 
       
       unless params[:evaluationtype] == "" or params[:evaluationtype] == nil
-      @exam = Exam.find_by_id(params[:examName].to_i)
+      @exam = Exam.find(params[:examName].to_i)
      
       @exam.update_attributes(:manual_evaluation => params[:evaluationtype])
       end
@@ -334,7 +334,7 @@ class ExamsController < ApplicationController
     @category_id = params[:examCategory].to_i
 
       unless @category_id == 0      
-        category_exam = Categoryexam.find_by_id(@category_id)#where(["id = ?",@category_id])
+        category_exam = Categoryexam.find(@category_id)#where(["id = ?",@category_id])
          @category_user = Categoryuser.where(["category_id = ? and currentyear = ?",category_exam.category_id,category_exam.currentyear]).order("created_at desc").paginate(:page => params[:page], :per_page => 10)      
       end
 
@@ -342,16 +342,16 @@ class ExamsController < ApplicationController
  
   def assignExaminees
    exam_category = params[:setExamcategory].to_i
-   @categoryexam = Categoryexam.find_by_id(params[:setExamcategory].to_i)
+   @categoryexam = Categoryexam.find(params[:setExamcategory].to_i)
    categoryuser = params[:examinee]
-   @examName = Exam.find_by_id(@categoryexam.exam_id)
-   @examId = Exam.find_by_id(@categoryexam.exam_id)
+   @examName = Exam.find(@categoryexam.exam_id)
+   @examId = Exam.find(@categoryexam.exam_id)
    checkQuestons = @examId.questions
    @questions_length = checkQuestons.length
   if @questions_length > 0
 
   categoryuser.each do|user|  
-    @categoryuser = Categoryuser.find_by_id(user.to_i)   
+    @categoryuser = Categoryuser.find(user.to_i)   
     @getCategoryexamuser = Categoryexamuser.find_by_categoryuser_id_and_categoryexam_id(@categoryuser.id, @categoryexam.id)
    
    if @getCategoryexamuser == nil
@@ -361,7 +361,7 @@ class ExamsController < ApplicationController
       @categoryexamuser.categoryuser_id = @categoryuser.id
       @categoryexamuser.attempt = 1
       
-       getExaminee = User.find_by_id(@categoryuser.user_id)
+       getExaminee = User.find(@categoryuser.user_id)
               
        @categoryexamuser.exam_date = @examName.exam_date
        @categoryexamuser.time_hour = @examName.time_hour
@@ -377,8 +377,8 @@ class ExamsController < ApplicationController
       @attempt = @getCategoryexamuser.attempt
       
       @getCategoryexamuser.update_attributes(:attempt => @attempt+1, :has_attended=>0, :is_confirmed=>0, :exam_date=>@examName.exam_date, :time_hour=>@examName.time_hour, :time_min=>@examName.time_min, :need_evaluation=>2)
-         @examName = Exam.find_by_id(@categoryexam.exam_id)
-         getExaminee = User.find_by_id(@categoryuser.user_id)
+         @examName = Exam.find(@categoryexam.exam_id)
+         getExaminee = User.find(@categoryuser.user_id)
           if getExaminee.is_temp_examinee == 0
             UserMailer.examSchedule(@examName,getExaminee).deliver
           end
@@ -401,7 +401,7 @@ class ExamsController < ApplicationController
   end
   
   def previewExam
-    @exam = Exam.find_by_id(params[:exam].to_i)
+    @exam = Exam.find(params[:exam].to_i)
     exam = @exam.id
     sql = "SELECT U.name, D.currentyear as year, U.is_temp_examinee as temp_examinee
           FROM       categoryexamusers Q 
@@ -450,13 +450,13 @@ class ExamsController < ApplicationController
   end
   
   def groupExam
-    @getExam = Exam.find_by_id(params[:exam][:id].to_i)
-    @getexamType = Examtype.find_by_id(params[:exam][:name].to_i)
+    @getExam = Exam.find(params[:exam][:id].to_i)
+    @getexamType = Examtype.find(params[:exam][:name].to_i)
     @categories = params[:category]
     unless params[:category] == nil     
       @categories.each do|category|
         @categoryexams = Categoryexam.new
-      @getCategory = Category.find_by_id(category.to_i)  
+      @getCategory = Category.find(category.to_i)  
       @categoryexams.category_id = @getCategory.id
       @categoryexams.exam_id = @getExam.id
       @categoryexams.examtype_id = @getexamType.id
@@ -490,10 +490,10 @@ class ExamsController < ApplicationController
          @fetchQuestions += Question.sum(:mark, :conditions=>["id = ?", eq.question_id])
        end
 
-      @exam = Exam.find_by_id(params[:exam_id])
+      @exam = Exam.find(params[:exam_id])
       unless @fetchQuestions > mark.to_i
         if @exam.update_attributes(:total_mark=>params[:mark])
-          @examName = Exam.find_by_id(params[:exam_id])
+          @examName = Exam.find(params[:exam_id])
           @examMark = @examName.total_mark
           markDifference = @examMark - @fetchQuestions
           if markDifference >= 1
@@ -570,7 +570,7 @@ class ExamsController < ApplicationController
       @questionTypes = []
       @questions = params[:questions]
       @questions.each do|q|
-        @findQuestion = Question.find_by_id(q.to_i)
+        @findQuestion = Question.find(q.to_i)
         @questionTypes << @findQuestion.question_type_id
       end
 
@@ -579,14 +579,14 @@ class ExamsController < ApplicationController
       else
         render :json => {:manual_eval=>false}
       end
-      #@question = Question.find_by_id(params[:question].to_i)
+      #@question = Question.find(params[:question].to_i)
       #if @question.question_type_id == 12
       #  render :json => {:manual_eval=>true}
       #end
     end
   
     def hideEvaluationtype
-      @question = Question.find_by_id(params[:question].to_i)
+      @question = Question.find(params[:question].to_i)
       if @question.question_type_id == 12
         render :json => {:manual_eval=>true}
       end
@@ -677,14 +677,14 @@ class ExamsController < ApplicationController
     
       unless params[:examinee] == nil
         @ques = params[:examinee]
-        categoryexamuser = Categoryexamuser.find_by_id(params[:examinee].to_i)
+        categoryexamuser = Categoryexamuser.find(params[:examinee].to_i)
         @examResult = ExamResult.find_by_categoryexam_id_and_categoryuser_id_and_attempt(categoryexamuser.categoryexam_id,categoryexamuser.categoryuser_id,categoryexamuser.attempt)
         
         unless @examResult == nil
-        @categoryexam = Categoryexam.find_by_id(categoryexamuser.categoryexam_id)
-        @categoryuser = Categoryuser.find_by_id(categoryexamuser.categoryuser_id)
+        @categoryexam = Categoryexam.find(categoryexamuser.categoryexam_id)
+        @categoryuser = Categoryuser.find(categoryexamuser.categoryuser_id)
         @attempt = categoryexamuser.attempt
-        @exam = Exam.find_by_id(@categoryexam.exam_id)
+        @exam = Exam.find(@categoryexam.exam_id)
         questions = @exam.questions
         
         #-------------mark-----------------------
@@ -710,7 +710,7 @@ class ExamsController < ApplicationController
       
       unless params[:evaluate] == nil
          
-        evaluation = Evaluation.find_by_id(params[:evaluate].to_i)
+        evaluation = Evaluation.find(params[:evaluate].to_i)
         eval_qstn = Question.find(evaluation.question_id)
         @eval_flag = evaluation.evaluate.to_i
         if evaluation.evaluate == 1
@@ -745,10 +745,10 @@ class ExamsController < ApplicationController
     end
   
     def getExamQuestions
-      categoryexamuser = Categoryexamuser.find_by_id(params[:ceu].to_i)
-      categoryexam = Categoryexam.find_by_id(categoryexamuser.categoryexam_id)
-      categoryuser = Categoryuser.find_by_id(categoryexamuser.categoryuser_id)
-      exam = Exam.find_by_id(categoryexam.exam_id)
+      categoryexamuser = Categoryexamuser.find(params[:ceu].to_i)
+      categoryexam = Categoryexam.find(categoryexamuser.categoryexam_id)
+      categoryuser = Categoryuser.find(categoryexamuser.categoryuser_id)
+      exam = Exam.find(categoryexam.exam_id)
       questions = exam.questions
       #questions = exam.questions.paginate :per_page => 5, :conditions => ["question_type_id LIKE ?", 12] 
       @descriptive = []
@@ -767,7 +767,7 @@ class ExamsController < ApplicationController
     
     
     def manualEvaluation     
-      evaluation = Evaluation.find_by_id(params[:evaluate].to_i)
+      evaluation = Evaluation.find(params[:evaluate].to_i)
       
       if evaluation.update_attributes(:question_mark => params[:question_mark].to_i,:answer_mark => params[:answer_mark].to_f, :evaluate=>0)
         render :json => {:question=>true}
@@ -848,7 +848,7 @@ class ExamsController < ApplicationController
     category_id = params[:examCategory].to_i
       unless @category_id == 0 
         
-        category_exam = Categoryexam.find_by_id(@category_id)
+        category_exam = Categoryexam.find(@category_id)
          #@category_user = Categoryuser.where(["category_id = ? and currentyear = ?",category_exam.category_id,category_exam.currentyear]).order("created_at desc").paginate(:page => params[:page], :per_page => 10)      
          sql = "SELECT  U.name as userName, U.id as userId, B.category_id as categoryId, S.name as subjectName 
             FROM       subjectusers A 

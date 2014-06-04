@@ -10,7 +10,7 @@
 
 <%@category_exam.each do|exam|%>
 <tr class="updateAltrRow <%= cycle("odd", "even") %>">
-<% exam = Exam.find_by_id(exam.exam_id)%>
+<% exam = Exam.find(exam.exam_id)%>
 <td><%=exam.name%></td>
 
 
